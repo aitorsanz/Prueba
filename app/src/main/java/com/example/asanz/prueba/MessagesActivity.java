@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -61,6 +62,12 @@ public class MessagesActivity extends AppCompatActivity {
                             List<String> mensajes = null;
                             try {
                                 urlConnection = (HttpURLConnection) url.openConnection();
+                                boolean respuesta = urlConnection.getResponseCode()==HttpURLConnection.HTTP_OK;
+                                if (respuesta) {
+                                    BufferedReader reader = new BufferedReader(new
+                                            InputStreamReader(urlConnection.getInputStream()));
+                                    reader.close();
+                                }
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }finally {
@@ -72,6 +79,7 @@ public class MessagesActivity extends AppCompatActivity {
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
+
                             try {
                                 if(in == null){
                                     mensajes = null;
