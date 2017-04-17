@@ -69,6 +69,7 @@ public class MessagesActivity extends AppCompatActivity {
                             InputStream in = null;
                             try {
                                 in = new BufferedInputStream(urlConnection.getInputStream());
+                                System.out.println();
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
