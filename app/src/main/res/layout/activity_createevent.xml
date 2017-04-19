@@ -12,8 +12,8 @@
 
     <DatePicker
         android:id="@+id/calendario"
-        android:layout_width="244dp"
-        android:layout_height="291dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="402dp" />
 
     <EditText
         android:id="@+id/editText"
