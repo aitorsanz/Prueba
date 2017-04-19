@@ -10,4 +10,8 @@
         android:text="Calendar"
         />
 
+    <ListView
+        android:id="@+id/EventsList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
