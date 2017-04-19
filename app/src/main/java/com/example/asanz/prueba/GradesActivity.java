@@ -47,7 +47,7 @@ public class GradesActivity extends AppCompatActivity {
                     public void run() {
                         URL url = null;
                         try {
-                            url = new URL("http://wsmoodle.local/index/mensajes");
+                            url = new URL("http://wsmoodle.local/index/grades");
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }
