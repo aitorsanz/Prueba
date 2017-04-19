@@ -7,7 +7,10 @@ import android.util.JsonReader;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -39,7 +42,14 @@ public class CalendarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
+        Button botonCrearEvento = (Button) findViewById(R.id.crearevento);
+        botonCrearEvento.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),SecondActivity.class));
+            }
+        });
         // Obtener la instancia de la lista
+        /*
         events = (ListView) findViewById(R.id.EventsList);
         new Thread(
                 new Runnable() {
@@ -92,7 +102,7 @@ public class CalendarActivity extends AppCompatActivity {
                         }
                     }
                 }
-        ).start();
+        ).start();*/
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
