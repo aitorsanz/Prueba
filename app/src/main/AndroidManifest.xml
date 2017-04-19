@@ -24,6 +24,7 @@
         <activity android:name=".MessagesActivity"></activity>
         <activity android:name=".GradesActivity"></activity>
         <activity android:name=".CalendarActivity"></activity>
+        <activity android:name=".CreateEventActivity"></activity>
 
     </application>
 

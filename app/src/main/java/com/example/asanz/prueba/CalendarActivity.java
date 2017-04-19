@@ -45,7 +45,7 @@ public class CalendarActivity extends AppCompatActivity {
         Button botonCrearEvento = (Button) findViewById(R.id.crearevento);
         botonCrearEvento.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),SecondActivity.class));
+                startActivity(new Intent(getApplicationContext(),CreateEventActivity.class));
             }
         });
         // Obtener la instancia de la lista
