@@ -45,7 +45,7 @@ public class MessagesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
-        /*
+
         // Obtener la instancia de la lista
         messages = (ListView) findViewById(R.id.MessagesList);
             new Thread(
@@ -99,7 +99,7 @@ public class MessagesActivity extends AppCompatActivity {
                             }
                         }
                     }
-            ).start();*/
+            ).start();
 
     }
 
