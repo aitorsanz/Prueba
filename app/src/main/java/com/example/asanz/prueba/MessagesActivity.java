@@ -45,7 +45,7 @@ public class MessagesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
-
+        /*
         // Obtener la instancia de la lista
         messages = (ListView) findViewById(R.id.MessagesList);
             new Thread(
@@ -99,7 +99,7 @@ public class MessagesActivity extends AppCompatActivity {
                             }
                         }
                     }
-            ).start();
+            ).start();*/
 
     }
 
@@ -115,7 +115,10 @@ public class MessagesActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.salir:
                 Toast.makeText(this, "Saliendo", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

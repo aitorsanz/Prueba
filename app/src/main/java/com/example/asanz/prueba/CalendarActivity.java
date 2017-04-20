@@ -25,6 +25,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.widget.Toast.LENGTH_LONG;
+import static android.widget.Toast.makeText;
+
 /**
  * Created by asanz on 17/04/2017.
  */
@@ -104,6 +107,15 @@ public class CalendarActivity extends AppCompatActivity {
                 }
         ).start();*/
     }
+
+    public void clickCrearEvento (View view) {
+        makeText(this, "Evento Creado", LENGTH_LONG).show();
+        Intent intent = new Intent(this, CreateEventActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -115,7 +127,10 @@ public class CalendarActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.salir:
                 Toast.makeText(this, "Saliendo", Toast.LENGTH_LONG ).show();
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -66,8 +66,10 @@ public class SecondActivity extends  AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.salir:
-                Toast.makeText(this, "Saliendo", Toast.LENGTH_LONG ).show();
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

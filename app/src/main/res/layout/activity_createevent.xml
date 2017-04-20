@@ -24,9 +24,10 @@
         android:text="Evento" />
 
     <Button
-        android:id="@+id/creteevent"
+        android:id="@+id/createevent"
         android:layout_width="115dp"
         android:layout_height="wrap_content"
-        android:text="Crear" />
+        android:text="Crear"
+        android:onClick="clickBotonCrearEvento"/>
 
 </LinearLayout>

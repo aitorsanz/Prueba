@@ -39,6 +39,7 @@ public class GradesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grades);
+        /*
         // Obtener la instancia de la lista
         grades = (ListView) findViewById(R.id.GradesList);
         new Thread(
@@ -92,7 +93,7 @@ public class GradesActivity extends AppCompatActivity {
                         }
                     }
                 }
-        ).start();
+        ).start();*/
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -105,7 +106,10 @@ public class GradesActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.salir:
                 Toast.makeText(this, "Saliendo", Toast.LENGTH_LONG ).show();
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
