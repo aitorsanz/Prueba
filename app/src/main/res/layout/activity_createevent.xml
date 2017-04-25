@@ -10,10 +10,10 @@
         android:text="Creación de Evento en Calendario"
         />
 
-    <DatePicker
-        android:id="@+id/calendario"
-        android:layout_width="wrap_content"
-        android:layout_height="402dp" />
+    <CalendarView
+        android:id="@+id/createeventcalendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/editText"

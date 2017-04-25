@@ -8,21 +8,17 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static android.widget.Toast.LENGTH_LONG;
@@ -37,7 +33,6 @@ public class CalendarActivity extends AppCompatActivity {
     Lista de eventos
     */
     ListView events;
-
     /*
     Cliente para la conexión al servidor
      */
@@ -51,6 +46,13 @@ public class CalendarActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),CreateEventActivity.class));
             }
         });
+
+        long selectedDate = getIntent().getLongExtra("selectedDate", 0);
+        if(selectedDate > 0){
+            CalendarView simpleCalendarView = (CalendarView) findViewById(R.id.calendarView); // get the reference of CalendarView
+            simpleCalendarView.setDate(selectedDate);
+        }
+
         // Obtener la instancia de la lista
         /*
         events = (ListView) findViewById(R.id.EventsList);
