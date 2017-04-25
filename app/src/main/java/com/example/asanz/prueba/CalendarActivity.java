@@ -137,9 +137,9 @@ public class CalendarActivity extends AppCompatActivity {
         }
     }
     /*
-Método encargado de coordinar la conversión final de un flujo
-con formato JSON
-*/
+    Método encargado de coordinar la conversión final de un flujo
+    con formato JSON
+    */
     public List<String> readJsonStream(InputStream in) throws IOException {
 
         // Nueva instancia de un lector JSON
