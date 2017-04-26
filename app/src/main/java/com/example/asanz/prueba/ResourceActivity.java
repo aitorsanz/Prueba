@@ -7,60 +7,53 @@ import android.util.JsonReader;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CalendarView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-
-import static android.widget.Toast.LENGTH_LONG;
-import static android.widget.Toast.makeText;
 
 /**
  * Created by asanz on 17/04/2017.
  */
 
-public class CalendarActivity extends AppCompatActivity {
+public class ResourceActivity extends AppCompatActivity {
     /*
     Lista de eventos
     */
-    ListView events;
+    ListView courses;
+
     /*
     Cliente para la conexión al servidor
      */
     HttpURLConnection con;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar);
-        long selectedDate = getIntent().getLongExtra("selectedDate", 0);
-        if(selectedDate > 0){
-            CalendarView simpleCalendarView = (CalendarView) findViewById(R.id.calendarView); // get the reference of CalendarView
-            simpleCalendarView.setDate(selectedDate);
-        }
-
+        setContentView(R.layout.activity_resource);
         // Obtener la instancia de la lista
         /*
-        events = (ListView) findViewById(R.id.EventsList);
+        courses = (ListView) findViewById(R.id.EventsList);
         new Thread(
                 new Runnable() {
                     @Override
                     public void run() {
                         URL url = null;
                         try {
-                            url = new URL("http://wsmoodle.local/index/grades");
+                            url = new URL("http://wsmoodle.local/index/courses");
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }
                         HttpURLConnection urlConnection = null;
-                        List<String> eventos = null;
+                        List<String> cursos = null;
                         try {
                             urlConnection = (HttpURLConnection) url.openConnection();
                             boolean respuesta = urlConnection.getResponseCode()==HttpURLConnection.HTTP_OK;
@@ -83,17 +76,17 @@ public class CalendarActivity extends AppCompatActivity {
 
                         try {
                             if(in == null){
-                                eventos = null;
+                                cursos = null;
                             }else{
-                                eventos = readJsonStream(in);
+                                cursos = readJsonStream(in);
                             }
 
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                                     getBaseContext(),
-                                    android.R.layout.simple_list_item_1, eventos);
+                                    android.R.layout.simple_list_item_1, cursos);
 
                             // Relacionar adaptador a la lista
-                            events.setAdapter(adapter);
+                            courses.setAdapter(adapter);
                             // Acciones a realizar con el flujo de datos
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -102,14 +95,6 @@ public class CalendarActivity extends AppCompatActivity {
                 }
         ).start();*/
     }
-
-    public void clickCrearEvento (View view) {
-        Intent intent = new Intent(this, CreateEventActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -131,9 +116,9 @@ public class CalendarActivity extends AppCompatActivity {
         }
     }
     /*
-    Método encargado de coordinar la conversión final de un flujo
-    con formato JSON
-    */
+  Método encargado de coordinar la conversión final de un flujo
+  con formato JSON
+   */
     public List<String> readJsonStream(InputStream in) throws IOException {
 
         // Nueva instancia de un lector JSON

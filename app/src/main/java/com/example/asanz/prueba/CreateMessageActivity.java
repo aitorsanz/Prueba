@@ -1,10 +1,6 @@
 package com.example.asanz.prueba;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.JsonReader;
@@ -13,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -35,85 +32,26 @@ import static android.widget.Toast.makeText;
  * Created by asanz on 17/04/2017.
  */
 
-public class MessagesActivity extends AppCompatActivity {
-    /*
-    Lista de mensajes
-     */
-    ListView messages;
+public class CreateMessageActivity extends AppCompatActivity {
 
-    /*
-    Cliente para la conexión al servidor
-     */
-    HttpURLConnection con;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_messages);
+        setContentView(R.layout.activity_createmessage);
 
-        // Obtener la instancia de la lista
-        messages = (ListView) findViewById(R.id.MessagesList);
-            new Thread(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            URL url = null;
-                            try {
-                                url = new URL("http://wsmoodle.local/index/mensajes");
-                            } catch (MalformedURLException e) {
-                                e.printStackTrace();
-                            }
-                            HttpURLConnection urlConnection = null;
-                            List<String> mensajes = null;
-                            try {
-                                urlConnection = (HttpURLConnection) url.openConnection();
-                                boolean respuesta = urlConnection.getResponseCode()==HttpURLConnection.HTTP_OK;
-                                if (respuesta) {
-                                    BufferedReader reader = new BufferedReader(new
-                                            InputStreamReader(urlConnection.getInputStream()));
-                                    reader.close();
-                                }
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }finally {
-                                urlConnection.disconnect();
-                            }
-                            InputStream in = null;
-                            try {
-                                in = new BufferedInputStream(urlConnection.getInputStream());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-
-                            try {
-                                if(in == null){
-                                    mensajes = null;
-                                }else{
-                                    mensajes = readJsonStream(in);
-                                }
-
-                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                                        getBaseContext(),
-                                        android.R.layout.simple_list_item_1, mensajes);
-
-                                // Relacionar adaptador a la lista
-                                messages.setAdapter(adapter);
-                                // Acciones a realizar con el flujo de datos
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-            ).start();
 
     }
 
-    public void clickCrearMensaje (View view) {
-        Intent intent = new Intent(this, CreateMessageActivity.class);
+    public void clickBotonEnviarMensaje (View view) {
+        makeText(this, "Mensaje Enviado", LENGTH_LONG).show();
+        Intent intent = new Intent(this, CalendarActivity.class);
+        CalendarView simpleCalendarView = (CalendarView) findViewById(R.id.createeventcalendar); // get the reference of CalendarView
+        long selectedDate = simpleCalendarView.getDate(); // get selected date in milliseconds
+        intent.putExtra("selectedDate", selectedDate);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
     }
-
     @Override
     public boolean onCreateOptionsMenu (Menu menu){
         MenuInflater inflater = getMenuInflater();
