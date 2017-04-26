@@ -44,10 +44,7 @@ public class CreateMessageActivity extends AppCompatActivity {
 
     public void clickBotonEnviarMensaje (View view) {
         makeText(this, "Mensaje Enviado", LENGTH_LONG).show();
-        Intent intent = new Intent(this, CalendarActivity.class);
-        CalendarView simpleCalendarView = (CalendarView) findViewById(R.id.createeventcalendar); // get the reference of CalendarView
-        long selectedDate = simpleCalendarView.getDate(); // get selected date in milliseconds
-        intent.putExtra("selectedDate", selectedDate);
+        Intent intent = new Intent(this, MessagesActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
