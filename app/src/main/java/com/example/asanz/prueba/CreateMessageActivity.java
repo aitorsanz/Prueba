@@ -1,16 +1,21 @@
 package com.example.asanz.prueba;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.JsonReader;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedInputStream;
@@ -38,16 +43,39 @@ public class CreateMessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createmessage);
-
-
     }
 
     public void clickBotonEnviarMensaje (View view) {
-        makeText(this, "Mensaje Enviado", LENGTH_LONG).show();
-        Intent intent = new Intent(this, MessagesActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
+        EditText mensaje = (EditText)findViewById(R.id.editText);
+        EditText rec = (EditText)findViewById(R.id.editPara);
+        String mensa = mensaje.getText().toString();
+        String para = rec.getText().toString();
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_LONG;
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.custom_toast,
+                (ViewGroup) findViewById(R.id.toast_layout_root));
+        if(para.equals("")){
+            CharSequence text = "No se puede enviar un mensaje sin destinatario";
+            TextView textToast = (TextView) layout.findViewById(R.id.text_toast);
+            textToast.setText(text);
+            Toast toast = new Toast(context);
+            toast.setDuration(duration);
+            toast.setView(layout);
+            toast.show();
+        }else{
+            CharSequence text = "Mensaje Enviado";
+            TextView textToast = (TextView) layout.findViewById(R.id.text_toast);
+            textToast.setText(text);
+            Toast toast = new Toast(context);
+            toast.setDuration(duration);
+            toast.setView(layout);
+            toast.show();
+            Intent intent = new Intent(this, MessagesActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }
     }
     @Override
     public boolean onCreateOptionsMenu (Menu menu){

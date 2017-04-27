@@ -1,13 +1,17 @@
 package com.example.asanz.prueba;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CalendarView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -26,7 +30,19 @@ public class CreateEventActivity extends AppCompatActivity {
     }
 
     public void clickBotonCrearEvento (View view) {
-        makeText(this, "Evento Creado", LENGTH_LONG).show();
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_LONG;
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.custom_toast,
+                (ViewGroup) findViewById(R.id.toast_layout_root));
+        CharSequence text = "Evento Creado";
+        TextView textToast = (TextView) layout.findViewById(R.id.text_toast);
+        textToast.setText(text);
+        Toast toast = new Toast(context);
+        toast.setDuration(duration);
+        toast.setView(layout);
+        toast.show();
+
         Intent intent = new Intent(this, CalendarActivity.class);
         CalendarView simpleCalendarView = (CalendarView) findViewById(R.id.createeventcalendar); // get the reference of CalendarView
         long selectedDate = simpleCalendarView.getDate(); // get selected date in milliseconds
