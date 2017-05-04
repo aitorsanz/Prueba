@@ -31,7 +31,7 @@ public class CreateEventActivity extends AppCompatActivity {
 
     public void clickBotonCrearEvento (View view) {
         Context context = getApplicationContext();
-        int duration = Toast.LENGTH_LONG;
+        int duration = Toast.LENGTH_SHORT;
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.custom_toast,
                 (ViewGroup) findViewById(R.id.toast_layout_root));
@@ -44,9 +44,6 @@ public class CreateEventActivity extends AppCompatActivity {
         toast.show();
 
         Intent intent = new Intent(this, CalendarActivity.class);
-        CalendarView simpleCalendarView = (CalendarView) findViewById(R.id.createeventcalendar); // get the reference of CalendarView
-        long selectedDate = simpleCalendarView.getDate(); // get selected date in milliseconds
-        intent.putExtra("selectedDate", selectedDate);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
@@ -61,7 +58,19 @@ public class CreateEventActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.salir:
-                Toast.makeText(this, "Saliendo", Toast.LENGTH_LONG).show();
+                Context context = getApplicationContext();
+                int duration = Toast.LENGTH_SHORT;
+                LayoutInflater inflater = getLayoutInflater();
+                View layout = inflater.inflate(R.layout.custom_toast,
+                        (ViewGroup) findViewById(R.id.toast_layout_root));
+                CharSequence text = "Saliendo";
+                TextView textToast = (TextView) layout.findViewById(R.id.text_toast);
+                textToast.setText(text);
+                Toast toast = new Toast(context);
+                toast.setDuration(duration);
+                toast.setView(layout);
+                toast.show();
+
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);

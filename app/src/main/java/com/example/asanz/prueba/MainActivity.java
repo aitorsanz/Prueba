@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 String password = pass.getText().toString();
                 //Constructores TOAST
                 Context context = getApplicationContext();
-                int duration = Toast.LENGTH_LONG;
+                int duration = Toast.LENGTH_SHORT;
                 LayoutInflater inflater = getLayoutInflater();
                 View layout = inflater.inflate(R.layout.custom_toast,
                         (ViewGroup) findViewById(R.id.toast_layout_root));
