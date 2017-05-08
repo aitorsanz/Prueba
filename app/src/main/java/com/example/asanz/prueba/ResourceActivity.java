@@ -11,6 +11,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -99,6 +101,25 @@ public class ResourceActivity extends AppCompatActivity {
                     }
                 }
         ).start();*/
+    }
+
+    public void showScorm(){
+//        WebViewClient webViewClient = new WebViewClient();
+//        webViewClient.setWebViewClient(webViewClient);
+//        webViewClient.clearCache(true);
+//        webViewClient.getSettings().setUseWideViewPort(true);
+//        webViewClient.setInitialScale(1);
+//        webViewClient.getSettings().setBuiltInZoomControls(true);
+//        webViewClient.clearHistory();
+//        webViewClient.getSettings().setAllowFileAccess(true);
+//        webViewClient.getSettings().setDomStorageEnabled(true);
+//        webViewClient.getSettings().setJavaScriptEnabled(true);
+//        webViewClient.getSettings().setPluginState(WebSettings.PluginState.ON);
+//        webViewClient.getSettings().setLoadWithOverviewMode(true);
+//        webViewClient.getSettings().setUseWideViewPort(true);
+//        webViewClient.getSettings().setPluginState(WebSettings.PluginState.ON);
+//        webViewClient.loadUrl("file://" + open_scorm.scorm_path
+//                + open_scorm.scorm_name + "/" + open_scorm.href.get(0));
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

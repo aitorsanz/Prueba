@@ -35,7 +35,8 @@
         <ListView
             android:id="@+id/EventsList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="#E9E4E1"/>
 
     </LinearLayout>
 </LinearLayout>
