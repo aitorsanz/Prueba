@@ -1,60 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#E9E4E1">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Bienvenido"
-         />
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#E9E4E1"
+    android:weightSum="1">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.08"
+        android:background="#E9E4E1"
         android:orientation="horizontal"
-        android:background="#E9E4E1">
+        android:weightSum="1">
+
         <ImageView
             android:id="@+id/settings_icon"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_marginRight="135px"
-            android:src="@drawable/settings"
-            android:background="#E9E4E1"/>
+            android:layout_marginLeft="40px"
+            android:layout_marginTop="40px"
+            android:background="#E9E4E1"
+            android:src="@drawable/settings" />
 
         <ImageView
             android:id="@+id/courses_icon"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_marginRight="135px"
-            android:src="@drawable/cursos"
-            android:background="#E9E4E1"/>
+            android:layout_marginTop="40px"
+            android:background="#E9E4E1"
+            android:src="@drawable/cursos" />
+
         <ImageView
             android:id="@+id/message_icon"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:src="@drawable/mensajes"/>
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="40px"
+            android:src="@drawable/mensajes" />
     </LinearLayout>
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#E9E4E1"
         android:orientation="horizontal"
-        android:background="#E9E4E1">
+        android:layout_weight="0.08">
+
         <ImageView
             android:id="@+id/grades_icon"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginLeft="135px"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="175px"
             android:layout_marginRight="135px"
-            android:src="@drawable/expediente"
-            android:background="#E9E4E1"/>
+            android:layout_marginTop="40px"
+            android:background="#E9E4E1"
+            android:src="@drawable/expediente" />
+
         <ImageView
             android:id="@+id/calendar_icon"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:src="@drawable/calendar"
-            android:background="#E9E4E1"/>
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="#E9E4E1"
+            android:layout_marginTop="40px"
+            android:src="@drawable/calendar" />
     </LinearLayout>
 </LinearLayout>
