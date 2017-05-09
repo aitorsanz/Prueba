@@ -2,6 +2,7 @@ package com.example.asanz.prueba;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.JsonReader;
@@ -15,8 +16,10 @@ import android.webkit.WebSettings;
 import android.webkit.WebViewClient;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -46,6 +49,11 @@ public class ResourceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resource);
+        try {
+            this.showVideo();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         // Obtener la instancia de la lista
         /*
         courses = (ListView) findViewById(R.id.EventsList);
@@ -103,24 +111,45 @@ public class ResourceActivity extends AppCompatActivity {
         ).start();*/
     }
 
+    /**
+     * Muestra un tipo de recurso SCORM
+     * */
     public void showScorm(){
-//        WebViewClient webViewClient = new WebViewClient();
-//        webViewClient.setWebViewClient(webViewClient);
-//        webViewClient.clearCache(true);
-//        webViewClient.getSettings().setUseWideViewPort(true);
-//        webViewClient.setInitialScale(1);
-//        webViewClient.getSettings().setBuiltInZoomControls(true);
-//        webViewClient.clearHistory();
-//        webViewClient.getSettings().setAllowFileAccess(true);
-//        webViewClient.getSettings().setDomStorageEnabled(true);
-//        webViewClient.getSettings().setJavaScriptEnabled(true);
-//        webViewClient.getSettings().setPluginState(WebSettings.PluginState.ON);
-//        webViewClient.getSettings().setLoadWithOverviewMode(true);
-//        webViewClient.getSettings().setUseWideViewPort(true);
-//        webViewClient.getSettings().setPluginState(WebSettings.PluginState.ON);
-//        webViewClient.loadUrl("file://" + open_scorm.scorm_path
-//                + open_scorm.scorm_name + "/" + open_scorm.href.get(0));
+
     }
+    /**
+     * Muestra un tipo de recurso Video
+     * */
+    public void showVideo() throws IOException {
+        VideoView vidView = (VideoView)findViewById(R.id.myVideo);
+        String vidAddress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
+        Uri vidUri = Uri.parse(vidAddress);
+        vidView.setVideoURI(vidUri);
+        MediaController vidControl = new MediaController(this);
+        vidControl.setAnchorView(vidView);
+        vidView.setMediaController(vidControl);
+        vidView.start();
+    }
+    /**
+     * Muestra un tipo de recurso Ejercicio
+     * */
+    public void showEjercicio(){
+
+    }
+    /**
+     * Muestra un tipo de recurso Libro
+     * */
+    public void showLibro(){
+
+    }
+    /**
+     * Muestra un tipo de recurso Info
+     * */
+    public void showInfo(){
+
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

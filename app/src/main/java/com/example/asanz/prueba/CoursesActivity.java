@@ -44,6 +44,9 @@ public class CoursesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
+        Intent intent = new Intent(this, ResourceActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
         // Obtener la instancia de la lista
         /*
         courses = (ListView) findViewById(R.id.EventsList);
