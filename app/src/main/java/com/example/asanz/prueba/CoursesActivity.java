@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,20 +34,37 @@ import java.util.List;
 
 public class CoursesActivity extends AppCompatActivity {
     /*
-    Lista de eventos
-    */
-    ListView courses;
-
-    /*
     Cliente para la conexión al servidor
      */
     HttpURLConnection con;
+    ListView courses;
+    String[] curso = {
+            "Curso 1",
+            "Curso 2"
+    } ;
+    Integer[] imageId = {
+            R.drawable.cursos,
+            R.drawable.cursos
+    };
+    Class[] classArray = new Class[] { ResourceActivity.class };
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
-        Intent intent = new Intent(this, ResourceActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+
+        CourseList coursesList = new CourseList(CoursesActivity.this, curso, imageId);
+        courses = (ListView)findViewById(R.id.CoursesList);
+        courses.setAdapter(coursesList);
+        courses.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Intent intent = new Intent(getApplicationContext(),classArray[0]);
+                startActivity(intent);
+
+            }
+        });
         // Obtener la instancia de la lista
         /*
         courses = (ListView) findViewById(R.id.EventsList);

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.MediaController;
@@ -37,23 +38,48 @@ import java.util.List;
  */
 
 public class ResourceActivity extends AppCompatActivity {
-    /*
-    Lista de eventos
-    */
-    ListView courses;
+    ListView resources;
+    String[] recurso = {
+            "Texto",
+            "SCORM",
+            "Ejercicio",
+            "Video",
+            "Ebook"
+    } ;
+    Integer[] imageId = {
+            R.drawable.lupa,
+            R.drawable.lupa,
+            R.drawable.lupa,
+            R.drawable.lupa,
+            R.drawable.lupa
+    };
 
     /*
     Cliente para la conexión al servidor
      */
     HttpURLConnection con;
+
+    Class[] classArray = new Class[] { ResourceDetailActivity.class };
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resource);
-        try {
-            this.showVideo();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        CourseList resourcesList = new CourseList(ResourceActivity.this, recurso, imageId);
+        resources = (ListView)findViewById(R.id.ResourcesList);
+        resources.setAdapter(resourcesList);
+        resources.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                if(position == 3){
+                    Intent intent = new Intent(getApplicationContext(),classArray[0]);
+                    startActivity(intent);
+                }
+            }
+
+
+        });
+
         // Obtener la instancia de la lista
         /*
         courses = (ListView) findViewById(R.id.EventsList);
@@ -111,43 +137,6 @@ public class ResourceActivity extends AppCompatActivity {
         ).start();*/
     }
 
-    /**
-     * Muestra un tipo de recurso SCORM
-     * */
-    public void showScorm(){
-
-    }
-    /**
-     * Muestra un tipo de recurso Video
-     * */
-    public void showVideo() throws IOException {
-        VideoView vidView = (VideoView)findViewById(R.id.myVideo);
-        String vidAddress = "https://archive.org/download/ksnn_compilation_master_the_internet/ksnn_compilation_master_the_internet_512kb.mp4";
-        Uri vidUri = Uri.parse(vidAddress);
-        vidView.setVideoURI(vidUri);
-        MediaController vidControl = new MediaController(this);
-        vidControl.setAnchorView(vidView);
-        vidView.setMediaController(vidControl);
-        vidView.start();
-    }
-    /**
-     * Muestra un tipo de recurso Ejercicio
-     * */
-    public void showEjercicio(){
-
-    }
-    /**
-     * Muestra un tipo de recurso Libro
-     * */
-    public void showLibro(){
-
-    }
-    /**
-     * Muestra un tipo de recurso Info
-     * */
-    public void showInfo(){
-
-    }
 
 
     @Override

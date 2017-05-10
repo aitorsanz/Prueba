@@ -5,8 +5,9 @@
     android:layout_height="fill_parent"
     android:background="#E9E4E1">
 
-    <ListView
-        android:id="@+id/ResourcesList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <VideoView
+        android:id="@+id/myVideo"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerInParent="true" />
 </LinearLayout>
