@@ -28,7 +28,11 @@
         <activity android:name=".CreateMessageActivity"></activity>
         <activity android:name=".CourseActivity"></activity>
         <activity android:name=".ResourceActivity"></activity>
-        <activity android:name=".ResourceDetailActivity"></activity>
+        <activity android:name=".ResourceVideoActivity"></activity>
+        <activity android:name=".ResourceScormActivity"></activity>
+        <activity android:name=".ResourceTextoActivity"></activity>
+        <activity android:name=".ResourceEjercicioActivity"></activity>
+        <activity android:name=".ResourceEbookActivity"></activity>
 
     </application>
 

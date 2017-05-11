@@ -59,7 +59,7 @@ public class ResourceActivity extends AppCompatActivity {
      */
     HttpURLConnection con;
 
-    Class[] classArray = new Class[] { ResourceDetailActivity.class };
+    Class[] classArray = new Class[] { ResourceVideoActivity.class , ResourceEbookActivity.class, ResourceEjercicioActivity.class, ResourceTextoActivity.class, ResourceScormActivity.class};
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resource);
@@ -71,12 +71,25 @@ public class ResourceActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                if(position == 3){
-                    Intent intent = new Intent(getApplicationContext(),classArray[0]);
-                    startActivity(intent);
+                Intent intent;
+                switch (position) {
+                    case 0:
+                        intent = new Intent(getApplicationContext(),classArray[0]);
+                        startActivity(intent);
+                    case 1:
+                        intent = new Intent(getApplicationContext(),classArray[1]);
+                        startActivity(intent);
+                    case 2:
+                        intent = new Intent(getApplicationContext(),classArray[2]);
+                        startActivity(intent);
+                    case 3:
+                        intent = new Intent(getApplicationContext(),classArray[3]);
+                        startActivity(intent);
+                    case 4:
+                        intent = new Intent(getApplicationContext(),classArray[4]);
+                        startActivity(intent);
                 }
             }
-
 
         });
 
@@ -161,7 +174,6 @@ public class ResourceActivity extends AppCompatActivity {
                 toast.setDuration(duration);
                 toast.setView(layout);
                 toast.show();
-
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);

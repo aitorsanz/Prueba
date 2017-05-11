@@ -22,10 +22,11 @@ import java.io.IOException;
  * Created by asanz on 10/05/2017.
  */
 
-public class ResourceDetailActivity extends AppCompatActivity {
+public class ResourceVideoActivity extends AppCompatActivity {
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_resource_detail);
+        setContentView(R.layout.activity_resource_video);
         try {
             this.showVideo();
         } catch (IOException e) {
@@ -33,12 +34,9 @@ public class ResourceDetailActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Muestra un tipo de recurso SCORM
-     * */
-    public void showScorm(){
 
-    }
+
+
     /**
      * Muestra un tipo de recurso Video
      * */
@@ -51,24 +49,6 @@ public class ResourceDetailActivity extends AppCompatActivity {
         vidControl.setAnchorView(vidView);
         vidView.setMediaController(vidControl);
         vidView.start();
-    }
-    /**
-     * Muestra un tipo de recurso Ejercicio
-     * */
-    public void showEjercicio(){
-
-    }
-    /**
-     * Muestra un tipo de recurso Libro
-     * */
-    public void showLibro(){
-
-    }
-    /**
-     * Muestra un tipo de recurso Info
-     * */
-    public void showInfo(){
-
     }
 
     @Override
