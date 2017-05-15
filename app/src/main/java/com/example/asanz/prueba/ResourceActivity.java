@@ -59,7 +59,7 @@ public class ResourceActivity extends AppCompatActivity {
      */
     HttpURLConnection con;
 
-    Class[] classArray = new Class[] { ResourceVideoActivity.class , ResourceEbookActivity.class, ResourceEjercicioActivity.class, ResourceTextoActivity.class, ResourceScormActivity.class};
+    Class[] classArray = new Class[] { ResourceTextoActivity.class , ResourceScormActivity.class, ResourceEjercicioActivity.class, ResourceVideoActivity.class, ResourceEbookActivity.class};
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resource);
@@ -71,23 +71,22 @@ public class ResourceActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Intent intent;
                 switch (position) {
                     case 0:
-                        intent = new Intent(getApplicationContext(),classArray[0]);
-                        startActivity(intent);
+                        startActivity(new Intent(getApplicationContext(), ResourceTextoActivity.class));
+                        break;
                     case 1:
-                        intent = new Intent(getApplicationContext(),classArray[1]);
-                        startActivity(intent);
+                        startActivity(new Intent(getApplicationContext(), ResourceScormActivity.class));
+                        break;
                     case 2:
-                        intent = new Intent(getApplicationContext(),classArray[2]);
-                        startActivity(intent);
+                        startActivity(new Intent(getApplicationContext(), ResourceEjercicioActivity.class));
+                        break;
                     case 3:
-                        intent = new Intent(getApplicationContext(),classArray[3]);
-                        startActivity(intent);
+                        startActivity(new Intent(getApplicationContext(), ResourceVideoActivity.class));
+                        break;
                     case 4:
-                        intent = new Intent(getApplicationContext(),classArray[4]);
-                        startActivity(intent);
+                        startActivity(new Intent(getApplicationContext(), ResourceEbookActivity.class));
+                        break;
                 }
             }
 

@@ -102,10 +102,7 @@ public class CalendarActivity extends AppCompatActivity {
     }
 
     public void clickCrearEvento (View view) {
-        Intent intent = new Intent(this, CreateEventActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
+        startActivity(new Intent(getApplicationContext(),CreateEventActivity.class));
     }
 
     @Override

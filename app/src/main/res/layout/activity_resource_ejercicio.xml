@@ -4,10 +4,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#E9E4E1">
-
-    <TextView
-        android:id="@+id/myText"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_centerInParent="true" />
+    <ImageView
+        android:id="@+id/ejercicio"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="275px"
+        android:layout_marginTop="40px"
+        android:background="#E9E4E1"
+        android:src="@drawable/ejercicio" />
 </LinearLayout>

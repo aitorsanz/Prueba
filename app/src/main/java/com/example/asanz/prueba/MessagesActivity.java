@@ -111,10 +111,7 @@ public class MessagesActivity extends AppCompatActivity {
     }
 
     public void clickCrearMensaje (View view) {
-        Intent intent = new Intent(this, CreateMessageActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
+        startActivity(new Intent(getApplicationContext(),CreateMessageActivity.class));
     }
 
     @Override
