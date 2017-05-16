@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,8 +32,11 @@ public class ResourceEbookActivity extends AppCompatActivity {
      * Muestra un tipo de recurso Ebook
      * */
     public void showLibro(){
-        TextView vidView = (TextView)findViewById(R.id.myText);
-        vidView.setText("Prueba de Ebook");
+        TextView textView =(TextView)findViewById(R.id.ebookLink);
+        textView.setClickable(true);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+        String text = "<a href='http://video.seas.es/util/le2/HIB7001/index.html'> Libro electrónico del Módulo I - Programar en Drupal </a>";
+        textView.setText(Html.fromHtml(text));
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

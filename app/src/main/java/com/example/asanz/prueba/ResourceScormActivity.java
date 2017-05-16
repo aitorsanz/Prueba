@@ -10,6 +10,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +31,24 @@ public class ResourceScormActivity extends AppCompatActivity {
      * Muestra un tipo de recurso Info
      * */
     public void showScorm(){
-        TextView vidView = (TextView)findViewById(R.id.myText);
-        vidView.setText("Prueba de Scorm");
+        //No reproduce swf hay que probar con scorm
+        String url ="file://192.168.56.1/C:/Users/asanz/Downloads/Prueba/app/src/main/files/Ejemplo.swf";
+        WebViewClient webViewClient = new WebViewClient();
+        WebView webView = new WebView(getApplicationContext());
+        webView.setWebViewClient(webViewClient);
+        webView.clearCache(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.setInitialScale(1);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.clearHistory();
+        webView.getSettings().setAllowFileAccess(true);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setPluginState(WebSettings.PluginState.ON);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setPluginState(WebSettings.PluginState.ON);
+        webView.loadUrl(url);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
