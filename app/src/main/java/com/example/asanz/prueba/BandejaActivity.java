@@ -39,43 +39,16 @@ import static android.widget.Toast.makeText;
  * Created by asanz on 17/04/2017.
  */
 
-public class MessagesActivity extends AppCompatActivity {
+public class BandejaActivity extends AppCompatActivity {
 
     /*
     Cliente para la conexión al servidor
      */
     HttpURLConnection con;
-    ListView messages;
-    String[] mensajes = {
-            "Bandeja de Entrada",
-            "Bandeja de Salida"
-    } ;
-    Integer[] imageId = {
-            R.drawable.entrada,
-            R.drawable.mensajes
-    };
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_messages);
-        CourseList coursesList = new CourseList(MessagesActivity.this, mensajes, imageId);
-        messages = (ListView)findViewById(R.id.BandejasList);
-        messages.setAdapter(coursesList);
-        messages.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                switch (position) {
-                    case 0:
-                        startActivity(new Intent(getApplicationContext(), BandejaActivity.class));
-                        break;
-                    case 1:
-                        startActivity(new Intent(getApplicationContext(), BandejaActivity.class));
-                        break;
-                }
-
-            }
-        });
+        setContentView(R.layout.activity_bandeja);
         /*
         // Obtener la instancia de la lista
         messages = (ListView) findViewById(R.id.MessagesList);
@@ -132,10 +105,6 @@ public class MessagesActivity extends AppCompatActivity {
                     }
             ).start();*/
 
-    }
-
-    public void clickCrearMensaje (View view) {
-        startActivity(new Intent(getApplicationContext(),CreateMessageActivity.class));
     }
 
     @Override

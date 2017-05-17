@@ -46,7 +46,7 @@ public class CoursesActivity extends AppCompatActivity {
             R.drawable.cursos,
             R.drawable.cursos
     };
-    Class[] classArray = new Class[] { ResourceActivity.class };
+    Class[] classArray = new Class[] { SubjectActivity.class };
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);

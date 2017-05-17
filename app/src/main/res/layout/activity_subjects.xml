@@ -8,18 +8,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Messages"
+        android:text="Asignaturas"
         />
-    <Button
-        android:id="@+id/crearmensaje"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:text="Mensaje Nuevo"
-        android:onClick="clickCrearMensaje"/>
     <ListView
-        android:id="@+id/BandejasList"
+        android:id="@+id/SubjectsList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
 </LinearLayout>

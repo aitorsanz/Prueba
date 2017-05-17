@@ -33,6 +33,8 @@
         <activity android:name=".ResourceTextoActivity"></activity>
         <activity android:name=".ResourceEjercicioActivity"></activity>
         <activity android:name=".ResourceEbookActivity"></activity>
+        <activity android:name=".SubjectActivity"></activity>
+        <activity android:name=".BandejaActivity"></activity>
 
     </application>
 

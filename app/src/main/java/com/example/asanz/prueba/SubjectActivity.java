@@ -12,8 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,60 +21,59 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-import static android.widget.Toast.LENGTH_LONG;
-import static android.widget.Toast.makeText;
-
 /**
- * Created by asanz on 17/04/2017.
+ * Created by asanz on 17/05/2017.
  */
 
-public class CalendarActivity extends AppCompatActivity {
+public class SubjectActivity extends AppCompatActivity {
+
     /*
     Cliente para la conexión al servidor
      */
     HttpURLConnection con;
-
-    ListView events;
-    String[] eventos = {
-            "Tutoría",
-            "Entrega Tarea2"
+    ListView subjects;
+    String[] asignaturas = {
+            "Asignatura 1",
+            "Asignatura 2"
     } ;
     Integer[] imageId = {
-            R.drawable.calendar,
-            R.drawable.calendar
+            R.drawable.asignatura,
+            R.drawable.asignatura
     };
+    Class[] classArray = new Class[] { ResourceActivity.class };
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar);
-        CourseList coursesList = new CourseList(CalendarActivity.this, eventos, imageId);
-        events = (ListView)findViewById(R.id.EventsList);
-        events.setAdapter(coursesList);
-        events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        setContentView(R.layout.activity_subjects);
+        CourseList coursesList = new CourseList(SubjectActivity.this, asignaturas, imageId);
+        subjects = (ListView)findViewById(R.id.SubjectsList);
+        subjects.setAdapter(coursesList);
+        subjects.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                //startActivity(new Intent(getApplicationContext(), BandejaActivity.class));
+                Intent intent = new Intent(getApplicationContext(),classArray[0]);
+                startActivity(intent);
+
             }
         });
         // Obtener la instancia de la lista
         /*
-        events = (ListView) findViewById(R.id.EventsList);
+        courses = (ListView) findViewById(R.id.EventsList);
         new Thread(
                 new Runnable() {
                     @Override
                     public void run() {
                         URL url = null;
                         try {
-                            url = new URL("http://wsmoodle.local/index/grades");
+                            url = new URL("http://wsmoodle.local/index/courses");
                         } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }
                         HttpURLConnection urlConnection = null;
-                        List<String> eventos = null;
+                        List<String> cursos = null;
                         try {
                             urlConnection = (HttpURLConnection) url.openConnection();
                             boolean respuesta = urlConnection.getResponseCode()==HttpURLConnection.HTTP_OK;
@@ -99,17 +96,17 @@ public class CalendarActivity extends AppCompatActivity {
 
                         try {
                             if(in == null){
-                                eventos = null;
+                                cursos = null;
                             }else{
-                                eventos = readJsonStream(in);
+                                cursos = readJsonStream(in);
                             }
 
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                                     getBaseContext(),
-                                    android.R.layout.simple_list_item_1, eventos);
+                                    android.R.layout.simple_list_item_1, cursos);
 
                             // Relacionar adaptador a la lista
-                            events.setAdapter(adapter);
+                            courses.setAdapter(adapter);
                             // Acciones a realizar con el flujo de datos
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -118,11 +115,6 @@ public class CalendarActivity extends AppCompatActivity {
                 }
         ).start();*/
     }
-
-    public void clickCrearEvento (View view) {
-        startActivity(new Intent(getApplicationContext(),CreateEventActivity.class));
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -156,9 +148,9 @@ public class CalendarActivity extends AppCompatActivity {
         }
     }
     /*
-    Método encargado de coordinar la conversión final de un flujo
-    con formato JSON
-    */
+  Método encargado de coordinar la conversión final de un flujo
+  con formato JSON
+   */
     public List<String> readJsonStream(InputStream in) throws IOException {
 
         // Nueva instancia de un lector JSON
@@ -216,4 +208,5 @@ public class CalendarActivity extends AppCompatActivity {
         reader.endObject();
         return body;
     }
+
 }

@@ -10,7 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
@@ -28,7 +27,7 @@ public class ResourceScormActivity extends AppCompatActivity {
         this.showScorm();
     }
     /**
-     * Muestra un tipo de recurso Info
+     * Muestra un tipo de recurso Scorm
      * */
     public void showScorm(){
         //No reproduce swf hay que probar con scorm
