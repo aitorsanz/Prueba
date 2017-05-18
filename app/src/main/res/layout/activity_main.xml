@@ -8,7 +8,7 @@
 >
 
     <TextView
-        android:layout_width="150px"
+        android:layout_width="250px"
         android:layout_height="wrap_content"
         android:text="Login"
         android:id="@+id/labelLogin" />
@@ -19,7 +19,7 @@
      />
 
     <TextView
-        android:layout_width="150px"
+        android:layout_width="250px"
         android:layout_height="wrap_content"
         android:text="Password"
         android:layout_marginTop="72dp"
