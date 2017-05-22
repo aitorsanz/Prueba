@@ -59,7 +59,7 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                //startActivity(new Intent(getApplicationContext(), BandejaActivity.class));
+                startActivity(new Intent(getApplicationContext(), DetailEventActivity.class));
             }
         });
         // Obtener la instancia de la lista

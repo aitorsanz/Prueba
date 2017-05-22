@@ -35,6 +35,7 @@
         <activity android:name=".ResourceEbookActivity"></activity>
         <activity android:name=".SubjectActivity"></activity>
         <activity android:name=".BandejaActivity"></activity>
+        <activity android:name=".DetailEventActivity"></activity>
 
     </application>
 
