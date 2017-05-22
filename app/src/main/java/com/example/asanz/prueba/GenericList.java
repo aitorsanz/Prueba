@@ -12,26 +12,26 @@ import android.widget.TextView;
  * Created by asanz on 10/05/2017.
  */
 
-public class CourseList  extends ArrayAdapter<String> {
+public class GenericList  extends ArrayAdapter<String> {
     private final Activity context;
-    private final String[] courses;
+    private final String[] list;
     private final Integer[] imageId;
 
-    public CourseList(Activity context, String[] courses, Integer[] imageId) {
-        super(context, R.layout.list_course, courses);
+    public GenericList(Activity context, String[] list, Integer[] imageId) {
+        super(context, R.layout.list_generic, list);
         this.context = context;
-        this.courses = courses;
+        this.list = list;
         this.imageId = imageId;
 
     }
 
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.list_course, null, true);
+        View rowView = inflater.inflate(R.layout.list_generic, null, true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
 
         ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
-        txtTitle.setText(courses[position]);
+        txtTitle.setText(list[position]);
 
         imageView.setImageResource(imageId[position]);
         return rowView;

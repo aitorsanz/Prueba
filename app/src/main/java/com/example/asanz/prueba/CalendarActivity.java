@@ -51,7 +51,7 @@ public class CalendarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
-        CourseList coursesList = new CourseList(CalendarActivity.this, eventos, imageId);
+        GenericList coursesList = new GenericList(CalendarActivity.this, eventos, imageId);
         events = (ListView)findViewById(R.id.EventsList);
         events.setAdapter(coursesList);
         events.setOnItemClickListener(new AdapterView.OnItemClickListener() {

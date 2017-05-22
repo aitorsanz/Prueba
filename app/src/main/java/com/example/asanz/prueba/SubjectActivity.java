@@ -46,7 +46,7 @@ public class SubjectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subjects);
-        CourseList coursesList = new CourseList(SubjectActivity.this, asignaturas, imageId);
+        GenericList coursesList = new GenericList(SubjectActivity.this, asignaturas, imageId);
         subjects = (ListView)findViewById(R.id.SubjectsList);
         subjects.setAdapter(coursesList);
         subjects.setOnItemClickListener(new AdapterView.OnItemClickListener() {

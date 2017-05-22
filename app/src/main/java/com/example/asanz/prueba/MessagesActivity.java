@@ -57,7 +57,7 @@ public class MessagesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
-        CourseList coursesList = new CourseList(MessagesActivity.this, mensajes, imageId);
+        GenericList coursesList = new GenericList(MessagesActivity.this, mensajes, imageId);
         messages = (ListView)findViewById(R.id.BandejasList);
         messages.setAdapter(coursesList);
         messages.setOnItemClickListener(new AdapterView.OnItemClickListener() {

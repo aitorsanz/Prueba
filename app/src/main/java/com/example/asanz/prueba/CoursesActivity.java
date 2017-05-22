@@ -52,7 +52,7 @@ public class CoursesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_courses);
 
-        CourseList coursesList = new CourseList(CoursesActivity.this, curso, imageId);
+        GenericList coursesList = new GenericList(CoursesActivity.this, curso, imageId);
         courses = (ListView)findViewById(R.id.CoursesList);
         courses.setAdapter(coursesList);
         courses.setOnItemClickListener(new AdapterView.OnItemClickListener() {

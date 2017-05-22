@@ -63,7 +63,7 @@ public class ResourceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resource);
-        CourseList resourcesList = new CourseList(ResourceActivity.this, recurso, imageId);
+        GenericList resourcesList = new GenericList(ResourceActivity.this, recurso, imageId);
         resources = (ListView)findViewById(R.id.ResourcesList);
         resources.setAdapter(resourcesList);
         resources.setOnItemClickListener(new AdapterView.OnItemClickListener() {
