@@ -36,7 +36,10 @@ public class DetailEventActivity extends AppCompatActivity {
         toast.setDuration(duration);
         toast.setView(layout);
         toast.show();
-        startActivity(new Intent(getApplicationContext(),CalendarActivity.class));
+        Intent intent = new Intent(this, CalendarActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     public void clickEliminarEvento (View view) {
@@ -52,7 +55,10 @@ public class DetailEventActivity extends AppCompatActivity {
         toast.setDuration(duration);
         toast.setView(layout);
         toast.show();
-        startActivity(new Intent(getApplicationContext(),CalendarActivity.class));
+        Intent intent = new Intent(this, CalendarActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     @Override
