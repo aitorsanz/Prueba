@@ -62,6 +62,7 @@ public class CalendarActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), DetailEventActivity.class));
             }
         });
+        // TODO: 25/05/2017 Conexión con campus para obtener los eventos del usuario
         // Obtener la instancia de la lista
         /*
         events = (ListView) findViewById(R.id.EventsList);

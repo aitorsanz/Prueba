@@ -49,6 +49,7 @@ public class BandejaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bandeja);
+        // TODO: 25/05/2017 Conexión con campus para obtener los mensajes de la bandeja
         /*
         // Obtener la instancia de la lista
         messages = (ListView) findViewById(R.id.MessagesList);

@@ -18,6 +18,7 @@ import android.widget.Toast;
  */
 
 public class DetailEventActivity extends AppCompatActivity {
+    // TODO: 25/05/2017 Conexión con campues para obtener detalle  de evento
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailevent);

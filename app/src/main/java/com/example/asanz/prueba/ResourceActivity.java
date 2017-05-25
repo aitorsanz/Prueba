@@ -59,7 +59,7 @@ public class ResourceActivity extends AppCompatActivity {
      */
     HttpURLConnection con;
 
-    Class[] classArray = new Class[] { ResourceTextoActivity.class , ResourceScormActivity.class, ResourceEjercicioActivity.class, ResourceVideoActivity.class, ResourceEbookActivity.class};
+    // TODO: 25/05/2017 Conexión con campues para obtener listado de recursos
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resource);

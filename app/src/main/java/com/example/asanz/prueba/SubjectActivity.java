@@ -42,6 +42,7 @@ public class SubjectActivity extends AppCompatActivity {
             R.drawable.asignatura,
             R.drawable.asignatura
     };
+    // TODO: 25/05/2017 Conexión con campues para obtener listado de asignaturas de un curso
     Class[] classArray = new Class[] { ResourceActivity.class };
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

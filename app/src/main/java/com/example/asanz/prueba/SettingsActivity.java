@@ -44,6 +44,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        // TODO: 25/05/2017 Conexión con campus para obtener la configuración del usuarios
         /*
         // Obtener la instancia de la lista
         settings = (ListView) findViewById(R.id.MessagesList);

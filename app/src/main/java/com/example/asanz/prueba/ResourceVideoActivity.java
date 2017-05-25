@@ -35,8 +35,7 @@ public class ResourceVideoActivity extends AppCompatActivity {
     }
 
 
-
-
+// TODO: 25/05/2017 Conexión con campus para obtener recurso video
     /**
      * Muestra un tipo de recurso Video
      * */

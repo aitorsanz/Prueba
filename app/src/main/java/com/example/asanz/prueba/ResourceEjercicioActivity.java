@@ -27,6 +27,7 @@ public class ResourceEjercicioActivity extends AppCompatActivity {
         this.showEjercicio();
     }
 
+    // TODO: 25/05/2017 Conexión con campus para obtener ejercicio
     /**
      * Muestra un tipo de recurso Ejercicio
      */

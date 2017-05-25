@@ -26,6 +26,7 @@ public class ResourceTextoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_resource_texto);
         this.showInfo();
     }
+    // TODO: 25/05/2017 Conexión con campus para obtener recurso scorm
     /**
      * Muestra un tipo de recurso Info
      * */

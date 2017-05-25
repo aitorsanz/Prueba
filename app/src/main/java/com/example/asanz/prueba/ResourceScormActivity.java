@@ -26,6 +26,7 @@ public class ResourceScormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_resource_scorm);
         this.showScorm();
     }
+    // TODO: 25/05/2017 Conexión con campus para obtener recurso scorm
     /**
      * Muestra un tipo de recurso Scorm
      * */

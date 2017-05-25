@@ -36,7 +36,7 @@ import static android.widget.Toast.makeText;
 /**
  * Created by asanz on 17/04/2017.
  */
-
+// TODO: 25/05/2017 Conexión con campues para enviar mensaje
 public class CreateMessageActivity extends AppCompatActivity {
 
 

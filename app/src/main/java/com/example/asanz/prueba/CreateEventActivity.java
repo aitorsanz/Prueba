@@ -22,7 +22,7 @@ import static android.widget.Toast.makeText;
 /**
  * Created by asanz on 19/04/2017.
  */
-
+// TODO: 25/05/2017 Conexión con campues para crear evento
 public class CreateEventActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

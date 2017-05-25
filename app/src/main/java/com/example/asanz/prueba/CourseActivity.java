@@ -44,6 +44,7 @@ public class CourseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
+        // TODO: 25/05/2017 Conexión con campus para obtener los elementos del curso
         // Obtener la instancia de la lista
         /*
         courses = (ListView) findViewById(R.id.EventsList);

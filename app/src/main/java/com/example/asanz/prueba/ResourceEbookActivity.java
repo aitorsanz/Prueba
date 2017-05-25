@@ -27,6 +27,7 @@ public class ResourceEbookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_resource_ebook);
         this.showLibro();
     }
+    // TODO: 25/05/2017 Conexión con campus para obtener recurso ebook
     /**
      * Muestra un tipo de recurso Ebook
      * */

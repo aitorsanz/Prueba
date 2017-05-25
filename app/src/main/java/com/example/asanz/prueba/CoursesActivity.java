@@ -65,6 +65,7 @@ public class CoursesActivity extends AppCompatActivity {
 
             }
         });
+        // TODO: 25/05/2017 Conexión con campus para obtener los cursos del usuario
         // Obtener la instancia de la lista
         /*
         courses = (ListView) findViewById(R.id.EventsList);

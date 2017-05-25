@@ -44,6 +44,7 @@ public class GradesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grades);
+        // TODO: 25/05/2017 Conexión con campus para obtener las notas del alumnmo
         /*
         // Obtener la instancia de la lista
         grades = (ListView) findViewById(R.id.GradesList);

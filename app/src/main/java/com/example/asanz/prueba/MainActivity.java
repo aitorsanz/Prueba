@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                     toast.setView(layout);
                     toast.show();
                 }
+                // TODO: 25/05/2017 Enlace con Campus para loguear
                 /*
                 try {
                     // Creando un objeto URL
