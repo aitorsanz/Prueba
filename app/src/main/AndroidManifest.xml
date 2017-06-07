@@ -26,7 +26,6 @@
         <activity android:name=".CalendarActivity"></activity>
         <activity android:name=".CreateEventActivity"></activity>
         <activity android:name=".CreateMessageActivity"></activity>
-        <activity android:name=".CourseActivity"></activity>
         <activity android:name=".ResourceActivity"></activity>
         <activity android:name=".ResourceVideoActivity"></activity>
         <activity android:name=".ResourceScormActivity"></activity>
