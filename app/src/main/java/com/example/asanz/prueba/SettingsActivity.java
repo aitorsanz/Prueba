@@ -2,7 +2,9 @@ package com.example.asanz.prueba;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
 import android.util.JsonReader;
 import android.view.LayoutInflater;
@@ -11,8 +13,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+
 import android.widget.ListView;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,9 +44,39 @@ public class SettingsActivity extends AppCompatActivity {
     Cliente para la conexión al servidor
      */
     HttpURLConnection con;
+    //Panel de opciones superiores
+    private FragmentTabHost tabHost;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        Resources res = getResources();
+        TabHost host = (TabHost)findViewById(R.id.tabHost);
+        host.setup();
+
+        //Tab 1
+        TabHost.TabSpec spec = host.newTabSpec("Tab One");
+        spec.setIndicator("");
+        spec.setContent(R.id.tab1);
+        host.addTab(spec);
+
+        //Tab 2
+        spec = host.newTabSpec("Tab Two");
+        spec.setIndicator("");
+        spec.setContent(R.id.tab2);
+        host.addTab(spec);
+
+        //Tab 3
+        spec = host.newTabSpec("Tab Three");
+        spec.setIndicator("");
+        spec.setContent(R.id.tab3);
+        host.addTab(spec);
+
+        //Tab 4
+        spec = host.newTabSpec("Tab Four");
+        spec.setIndicator("");
+        spec.setContent(R.id.tab4);
+        host.addTab(spec);
+
         // TODO: 25/05/2017 Conexión con campus para obtener la configuración del usuarios
         /*
         // Obtener la instancia de la lista
