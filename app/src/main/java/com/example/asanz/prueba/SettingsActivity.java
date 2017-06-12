@@ -44,38 +44,12 @@ public class SettingsActivity extends AppCompatActivity {
     Cliente para la conexión al servidor
      */
     HttpURLConnection con;
-    //Panel de opciones superiores
-    private FragmentTabHost tabHost;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         Resources res = getResources();
-        TabHost host = (TabHost)findViewById(R.id.tabHost);
-        host.setup();
 
-        //Tab 1
-        TabHost.TabSpec spec = host.newTabSpec("Tab One");
-        spec.setIndicator("");
-        spec.setContent(R.id.tab1);
-        host.addTab(spec);
-
-        //Tab 2
-        spec = host.newTabSpec("Tab Two");
-        spec.setIndicator("");
-        spec.setContent(R.id.tab2);
-        host.addTab(spec);
-
-        //Tab 3
-        spec = host.newTabSpec("Tab Three");
-        spec.setIndicator("");
-        spec.setContent(R.id.tab3);
-        host.addTab(spec);
-
-        //Tab 4
-        spec = host.newTabSpec("Tab Four");
-        spec.setIndicator("");
-        spec.setContent(R.id.tab4);
-        host.addTab(spec);
 
         // TODO: 25/05/2017 Conexión con campus para obtener la configuración del usuarios
         /*
