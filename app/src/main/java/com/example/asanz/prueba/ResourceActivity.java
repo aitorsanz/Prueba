@@ -2,6 +2,7 @@ package com.example.asanz.prueba;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.MediaController;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -63,6 +65,38 @@ public class ResourceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resource);
+        Resources res = getResources();
+
+        TabHost tabs=(TabHost)findViewById(android.R.id.tabhost);
+        tabs.setup();
+
+        TabHost.TabSpec spec=tabs.newTabSpec("mitab1");
+        spec.setContent(R.id.tab1);
+        spec.setIndicator("RECURSOS");
+        tabs.addTab(spec);
+
+        spec=tabs.newTabSpec("mitab2");
+        spec.setContent(R.id.tab2);
+        spec.setIndicator("DEBATES");
+        tabs.addTab(spec);
+
+        spec=tabs.newTabSpec("mitab3");
+        spec.setContent(R.id.tab3);
+        spec.setIndicator("MATERIALES");
+        tabs.addTab(spec);
+
+        spec=tabs.newTabSpec("mitab4");
+        spec.setContent(R.id.tab4);
+        spec.setIndicator("TEMPORIZACIÓN");
+        tabs.addTab(spec);
+
+        spec=tabs.newTabSpec("mitab5");
+        spec.setContent(R.id.tab5);
+        spec.setIndicator("DOCENTES");
+        tabs.addTab(spec);
+        tabs.setCurrentTab(0);
+
+        //Se carga la pestaña de recursos
         GenericList resourcesList = new GenericList(ResourceActivity.this, recurso, imageId);
         resources = (ListView)findViewById(R.id.ResourcesList);
         resources.setAdapter(resourcesList);
@@ -89,8 +123,14 @@ public class ResourceActivity extends AppCompatActivity {
                         break;
                 }
             }
-
         });
+        //Pestaña de debates
+
+        //Pestaña de docentes
+
+        //Pestaña de materiales
+
+        //Pestaña de temporizaciones
 
         // Obtener la instancia de la lista
         /*
