@@ -2,9 +2,8 @@ package com.example.asanz.prueba;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.JsonReader;
 import android.view.LayoutInflater;
@@ -13,28 +12,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
-import android.webkit.WebViewClient;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.MediaController;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * Created by asanz on 17/04/2017.
  */
@@ -60,44 +47,34 @@ public class ResourceActivity extends AppCompatActivity {
     Cliente para la conexión al servidor
      */
     HttpURLConnection con;
+    private ViewPager pager;
 
     // TODO: 25/05/2017 Conexión con campues para obtener listado de recursos
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resource);
-        Resources res = getResources();
+        // Instantiate a ViewPager
+        this.pager = (ViewPager) this.findViewById(R.id.pager);
 
-        TabHost tabs=(TabHost)findViewById(android.R.id.tabhost);
-        tabs.setup();
+        // Create an adapter with the fragments we show on the ViewPager
+        MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(
+                getSupportFragmentManager());
+        adapter.addFragment(ScreenSlidePageFragment.newInstance(getResources()
+                .getColor(R.color.colorPrimary), 0));
+        adapter.addFragment(ScreenSlidePageFragment.newInstance(getResources()
+                .getColor(R.color.colorPrimary), 1));
+        adapter.addFragment(ScreenSlidePageFragment.newInstance(getResources()
+                .getColor(R.color.colorPrimary), 2));
+        adapter.addFragment(ScreenSlidePageFragment.newInstance(getResources()
+                .getColor(R.color.colorPrimary), 3));
+        adapter.addFragment(ScreenSlidePageFragment.newInstance(getResources()
+                .getColor(R.color.colorPrimary), 4));
+        this.pager.setAdapter(adapter);
 
-        TabHost.TabSpec spec=tabs.newTabSpec("mitab1");
-        spec.setContent(R.id.tab1);
-        spec.setIndicator("RECURSOS");
-        tabs.addTab(spec);
 
-        spec=tabs.newTabSpec("mitab2");
-        spec.setContent(R.id.tab2);
-        spec.setIndicator("DEBATES");
-        tabs.addTab(spec);
-
-        spec=tabs.newTabSpec("mitab3");
-        spec.setContent(R.id.tab3);
-        spec.setIndicator("MATERIALES");
-        tabs.addTab(spec);
-
-        spec=tabs.newTabSpec("mitab4");
-        spec.setContent(R.id.tab4);
-        spec.setIndicator("TEMPORIZACIÓN");
-        tabs.addTab(spec);
-
-        spec=tabs.newTabSpec("mitab5");
-        spec.setContent(R.id.tab5);
-        spec.setIndicator("DOCENTES");
-        tabs.addTab(spec);
-        tabs.setCurrentTab(0);
 
         //Se carga la pestaña de recursos
-        GenericList resourcesList = new GenericList(ResourceActivity.this, recurso, imageId);
+        /*GenericList resourcesList = new GenericList(ResourceActivity.this, recurso, imageId);
         resources = (ListView)findViewById(R.id.ResourcesList);
         resources.setAdapter(resourcesList);
         resources.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -123,7 +100,7 @@ public class ResourceActivity extends AppCompatActivity {
                         break;
                 }
             }
-        });
+        });*/
         //Pestaña de debates
 
         //Pestaña de docentes
