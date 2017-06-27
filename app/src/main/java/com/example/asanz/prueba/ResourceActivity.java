@@ -16,12 +16,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.viewpagerindicator.TitlePageIndicator;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Created by asanz on 17/04/2017.
  */
@@ -48,7 +51,6 @@ public class ResourceActivity extends AppCompatActivity {
      */
     HttpURLConnection con;
     private ViewPager pager;
-
     // TODO: 25/05/2017 Conexión con campues para obtener listado de recursos
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,15 +64,18 @@ public class ResourceActivity extends AppCompatActivity {
         adapter.addFragment(ScreenSlidePageFragment.newInstance(getResources()
                 .getColor(R.color.colorPrimary), 0));
         adapter.addFragment(ScreenSlidePageFragment.newInstance(getResources()
-                .getColor(R.color.colorPrimary), 1));
+                .getColor(R.color.colorAccent), 1));
         adapter.addFragment(ScreenSlidePageFragment.newInstance(getResources()
-                .getColor(R.color.colorPrimary), 2));
+                .getColor(R.color.colorPrimaryDark), 2));
         adapter.addFragment(ScreenSlidePageFragment.newInstance(getResources()
-                .getColor(R.color.colorPrimary), 3));
+                .getColor(R.color.colorAccent), 3));
         adapter.addFragment(ScreenSlidePageFragment.newInstance(getResources()
                 .getColor(R.color.colorPrimary), 4));
         this.pager.setAdapter(adapter);
 
+        // Bind the title indicator to the adapter
+        TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.indicator);
+        titleIndicator.setViewPager(pager);
 
 
         //Se carga la pestaña de recursos

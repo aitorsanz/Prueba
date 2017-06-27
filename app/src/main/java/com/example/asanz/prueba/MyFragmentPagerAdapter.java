@@ -4,12 +4,12 @@ package com.example.asanz.prueba;
  * Created by asanz on 16/06/2017.
  */
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
