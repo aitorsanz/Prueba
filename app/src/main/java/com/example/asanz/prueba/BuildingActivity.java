@@ -2,7 +2,6 @@ package com.example.asanz.prueba;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -16,37 +15,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * Created by asanz on 11/05/2017.
+ * Created by aitor on 2/07/17.
  */
 
-public class ResourceEjercicioActivity extends AppCompatActivity {
-
+public class BuildingActivity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_resource_ejercicio);
-        this.showEjercicio();
+        setContentView(R.layout.activity_building);
+        ImageView img = (ImageView)findViewById(R.id.building);
     }
 
-    // TODO: 25/05/2017 Conexión con campus para obtener ejercicio
-    /**
-     * Muestra un tipo de recurso Ejercicio
-     */
-    public void showEjercicio() {
 
-        ImageView img = (ImageView)findViewById(R.id.ejercicio);
-        //img = (ImageView)findViewById(R.id.ejercicio);
-        img.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Uri uri = Uri.parse("http://eina.unizar.es/archivos/2014_2015/PFC_TrabajosFinEstudios/Propuesta_TFG.pdf");
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-            }
-        });
-    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
+        inflater.inflate(R.menu.resource_menu, menu);
         return true;
     }
 

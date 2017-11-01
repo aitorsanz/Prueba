@@ -4,14 +4,18 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#E9E4E1">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Settings"
+        android:text="Building"
         />
-
-    <ListView
-        android:id="@+id/GradesList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/building"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="275px"
+        android:layout_marginTop="40px"
+        android:background="#E9E4E1"
+        android:src="@drawable/building" />
 </LinearLayout>

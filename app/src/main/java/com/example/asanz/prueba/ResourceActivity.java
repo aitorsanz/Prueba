@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,7 +57,7 @@ public class ResourceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resource);
         // Instantiate a ViewPager
-        this.pager = (ViewPager) this.findViewById(R.id.pager);
+        /*this.pager = (ViewPager) this.findViewById(R.id.pager);
 
         // Create an adapter with the fragments we show on the ViewPager
         MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(
@@ -75,11 +76,11 @@ public class ResourceActivity extends AppCompatActivity {
 
         // Bind the title indicator to the adapter
         TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.indicator);
-        titleIndicator.setViewPager(pager);
+        titleIndicator.setViewPager(pager);*/
 
 
         //Se carga la pestaña de recursos
-        /*GenericList resourcesList = new GenericList(ResourceActivity.this, recurso, imageId);
+        GenericList resourcesList = new GenericList(ResourceActivity.this, recurso, imageId);
         resources = (ListView)findViewById(R.id.ResourcesList);
         resources.setAdapter(resourcesList);
         resources.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -105,7 +106,7 @@ public class ResourceActivity extends AppCompatActivity {
                         break;
                 }
             }
-        });*/
+        });
         //Pestaña de debates
 
         //Pestaña de docentes
@@ -176,12 +177,36 @@ public class ResourceActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
+        inflater.inflate(R.menu.resource_menu, menu);
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.debates:
+                Intent intent = new Intent(this, BuildingActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.docentes:
+                intent = new Intent(this, BuildingActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.temporizacion:
+                intent = new Intent(this, BuildingActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.materiales:
+                intent = new Intent(this, BuildingActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+                return true;
             case R.id.salir:
                 Context context = getApplicationContext();
                 int duration = Toast.LENGTH_SHORT;
@@ -195,7 +220,7 @@ public class ResourceActivity extends AppCompatActivity {
                 toast.setDuration(duration);
                 toast.setView(layout);
                 toast.show();
-                Intent intent = new Intent(this, MainActivity.class);
+                intent = new Intent(this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();

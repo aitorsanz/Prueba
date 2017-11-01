@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/debates"
+        android:title="@string/debates" >
+    </item>
+    <item android:id="@+id/docentes"
+        android:title="@string/docentes" >
+    </item>
+    <item android:id="@+id/materiales"
+        android:title="@string/materiales" >
+    </item>
+    <item android:id="@+id/temporizacion"
+        android:title="@string/temporizacion" >
+    </item>
+    <item android:id="@+id/salir"
+        android:title="@string/exit" >
+    </item>
+</menu>

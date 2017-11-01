@@ -18,23 +18,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SecondActivity"></activity>
-        <activity android:name=".SettingsActivity"></activity>
-        <activity android:name=".CoursesActivity"></activity>
-        <activity android:name=".MessagesActivity"></activity>
-        <activity android:name=".GradesActivity"></activity>
-        <activity android:name=".CalendarActivity"></activity>
-        <activity android:name=".CreateEventActivity"></activity>
-        <activity android:name=".CreateMessageActivity"></activity>
-        <activity android:name=".ResourceActivity"></activity>
-        <activity android:name=".ResourceVideoActivity"></activity>
-        <activity android:name=".ResourceScormActivity"></activity>
-        <activity android:name=".ResourceTextoActivity"></activity>
-        <activity android:name=".ResourceEjercicioActivity"></activity>
-        <activity android:name=".ResourceEbookActivity"></activity>
-        <activity android:name=".SubjectActivity"></activity>
-        <activity android:name=".BandejaActivity"></activity>
-        <activity android:name=".DetailEventActivity"></activity>
+        <activity android:name=".SecondActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".CoursesActivity" />
+        <activity android:name=".MessagesActivity" />
+        <activity android:name=".GradesActivity" />
+        <activity android:name=".CalendarActivity" />
+        <activity android:name=".CreateEventActivity" />
+        <activity android:name=".CreateMessageActivity" />
+        <activity android:name=".ResourceActivity" />
+        <activity android:name=".ResourceVideoActivity" />
+        <activity android:name=".ResourceScormActivity" />
+        <activity android:name=".ResourceTextoActivity" />
+        <activity android:name=".ResourceEjercicioActivity" />
+        <activity android:name=".ResourceEbookActivity" />
+        <activity android:name=".SubjectActivity" />
+        <activity android:name=".BandejaActivity" />
+        <activity android:name=".DetailEventActivity" />
+        <activity android:name=".BuildingActivity" />
 
     </application>
 

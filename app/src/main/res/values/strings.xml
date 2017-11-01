@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Campus Hiberus</string>
+    <string name="debates">Debates</string>
+    <string name="docentes">Docentes</string>
+    <string name="materiales">Materiales Adicionales</string>
+    <string name="temporizacion">Temporizaciones</string>
     <string name="exit">Salir</string>
 </resources>
