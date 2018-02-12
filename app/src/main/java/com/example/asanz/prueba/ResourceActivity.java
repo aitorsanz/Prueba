@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.util.JsonReader;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,21 +14,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.viewpagerindicator.TitlePageIndicator;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * Created by asanz on 17/04/2017.
  */
 
-public class ResourceActivity extends AppCompatActivity {
+public class ResourceActivity extends BaseActivity {
     ListView resources;
     String[] recurso = {
             "Texto",
@@ -53,7 +44,9 @@ public class ResourceActivity extends AppCompatActivity {
     HttpURLConnection con;
     private ViewPager pager;
     // TODO: 25/05/2017 Conexión con campues para obtener listado de recursos
-    protected void onCreate(Bundle savedInstanceState) {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resource);
         // Instantiate a ViewPager
@@ -181,6 +174,7 @@ public class ResourceActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.debates:
@@ -228,66 +222,5 @@ public class ResourceActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-    /*
-  Método encargado de coordinar la conversión final de un flujo
-  con formato JSON
-   */
-    public List<String> readJsonStream(InputStream in) throws IOException {
-
-        // Nueva instancia de un lector JSON
-        JsonReader reader = new JsonReader(
-                new InputStreamReader(in, "UTF-8"));
-
-        try {
-            return readCommentsArray(reader);
-        } finally {
-            reader.close();
-        }
-    }
-
-    /*
-    Este método lee cada elemento al interior de un array JSON
-     */
-    public List<String> readCommentsArray(JsonReader reader) throws IOException {
-        List<String> messages = new ArrayList<>();
-
-        // Se dirige al corchete de apertura del arreglo
-        reader.beginArray();
-        while (reader.hasNext()) {
-            messages.add(readMessage(reader));
-        }
-
-        // Se dirige al corchete de cierre
-        reader.endArray();
-        return messages;
-    }
-
-    /*
-    Lee los atributos de cada objeto
-     */
-    public String readMessage(JsonReader reader) throws IOException {
-
-        // Cuerpo del comentario
-        String body = null;
-
-        // Se dirige a la llave de apertura del objeto
-        reader.beginObject();
-
-        while (reader.hasNext()) {
-
-            // Se obtiene el nombre del atributo
-            String name = reader.nextName();
-
-            if (name.equals("body")) {
-                body = reader.nextString();
-            } else {
-                reader.skipValue();
-            }
-        }
-
-        // Se dirige a la llave de cierre del objeto
-        reader.endObject();
-        return body;
     }
 }
