@@ -15,9 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by fuste on 23/11/17.
- */
+
 
 public class BandejaDAO {
 

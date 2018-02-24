@@ -18,6 +18,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -52,18 +54,40 @@ public class CalendarActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
-        GenericList coursesList = new GenericList(CalendarActivity.this, eventos, imageId);
-        events = (ListView)findViewById(R.id.EventsList);
-        events.setAdapter(coursesList);
-        events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+        final Context context = getApplicationContext();
+        final int duration = Toast.LENGTH_SHORT;
+        LayoutInflater inflater = getLayoutInflater();
+        final View layout = inflater.inflate(R.layout.custom_toast,
+                (ViewGroup) findViewById(R.id.toast_layout_root));
+        final CalendarDAO calendarDAO = new CalendarDAO();
+        calendarDAO.obtenerEventos(new ServerCallBack() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                startActivity(new Intent(getApplicationContext(), DetailEventActivity.class));
+            public void onSuccess(JSONArray result) {
+                //TODO mostras listado de eventos del usuario
+                GenericList coursesList = new GenericList(CalendarActivity.this, eventos, imageId);
+                events = (ListView)findViewById(R.id.EventsList);
+                events.setAdapter(coursesList);
+                events.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view,
+                                            int position, long id) {
+                        startActivity(new Intent(getApplicationContext(), DetailEventActivity.class));
+                    }
+                });
             }
-        });
-        // TODO: 25/05/2017 Conexión con campus para obtener los eventos del usuario
+            @Override
+            public void onError() {
+                CharSequence text = "Imposible cargar los eventos";
+                TextView textToast = (TextView) layout.findViewById(R.id.text_toast);
+                textToast.setText(text);
+                Toast toast = new Toast(context);
+                toast.setDuration(duration);
+                toast.setView(layout);
+                toast.show();
+            }
+        }, true);
     }
 
     public void clickCrearEvento (View view) {
