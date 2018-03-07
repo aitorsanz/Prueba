@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -38,24 +39,28 @@ public class MainActivity extends AppCompatActivity {
                         (ViewGroup) findViewById(R.id.toast_layout_root));
 
                 final UsuarioDAO usuarioDAO = new UsuarioDAO();
-                usuarioDAO.accesoUsuario(user, password, new ServerCallBack() {
-                    @Override
-                    public void onSuccess(JSONArray result) {
-                        if (result.length() == 0){
-                            startActivity(new Intent(getApplicationContext(),SecondActivity.class));
+                try {
+                    usuarioDAO.accesoUsuario(user, password, new ServerCallBack() {
+                        @Override
+                        public void onSuccess(JSONArray result) {
+                            if (result.length() == 0){
+                                startActivity(new Intent(getApplicationContext(),SecondActivity.class));
+                            }
                         }
-                    }
-                    @Override
-                    public void onError() {
-                        CharSequence text = "Usuario o contraseña inválidos";
-                        TextView textToast = (TextView) layout.findViewById(R.id.text_toast);
-                        textToast.setText(text);
-                        Toast toast = new Toast(context);
-                        toast.setDuration(duration);
-                        toast.setView(layout);
-                        toast.show();
-                    }
-                }, true);
+                        @Override
+                        public void onError() {
+                            CharSequence text = "Usuario o contraseña inválidos";
+                            TextView textToast = (TextView) layout.findViewById(R.id.text_toast);
+                            textToast.setText(text);
+                            Toast toast = new Toast(context);
+                            toast.setDuration(duration);
+                            toast.setView(layout);
+                            toast.show();
+                        }
+                    }, true);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 /*if(user.equals("aitor") && password.equals("aitor")){
                     startActivity(new Intent(getApplicationContext(),SecondActivity.class));
                 }else{
