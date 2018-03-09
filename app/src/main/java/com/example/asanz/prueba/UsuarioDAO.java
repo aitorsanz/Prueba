@@ -26,7 +26,7 @@ public class UsuarioDAO {
     public void accesoUsuario (final String correo,final String pass, final ServerCallBack callBack, final boolean firstTime) throws JSONException {
 
         //String url = "https://quiet-lowlands-92391.herokuapp.com/api/registro/";
-        String url = "http://api.initech.local/usuario/acceso";
+        String url = "http://api.initech.local/oauth/token";
         //String url = "http://192.168.1.117:3000/api/registro/";
         url = url + correo + pass;
         JSONObject peticion = new JSONObject();

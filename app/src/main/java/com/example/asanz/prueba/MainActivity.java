@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
                     usuarioDAO.accesoUsuario(user, password, new ServerCallBack() {
                         @Override
                         public void onSuccess(JSONArray result) {
+                            System.out.println(result);
                             if (result.length() == 0){
                                 startActivity(new Intent(getApplicationContext(),SecondActivity.class));
                             }
