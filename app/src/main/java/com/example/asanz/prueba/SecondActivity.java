@@ -2,6 +2,7 @@ package com.example.asanz.prueba;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,8 @@ public class SecondActivity extends  BaseActivity{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        AppController global = ((AppController)getApplicationContext());
+        String token = global.getToken();
         //super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         //Settings

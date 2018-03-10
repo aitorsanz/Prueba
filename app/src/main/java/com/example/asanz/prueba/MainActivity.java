@@ -1,8 +1,6 @@
 package com.example.asanz.prueba;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -16,6 +14,7 @@ import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -43,14 +42,31 @@ public class MainActivity extends AppCompatActivity {
                     usuarioDAO.accesoUsuario(user, password, new ServerCallBack() {
                         @Override
                         public void onSuccess(JSONArray result) {
-                            System.out.println(result);
-                            if (result.length() == 0){
-                                startActivity(new Intent(getApplicationContext(),SecondActivity.class));
+                            try {
+                                String response = result.getString(0);
+                                JSONObject respuesta = new JSONObject(response);
+                                String token = respuesta.getString("access_token");
+                                if (token != null){
+                                   AppController global = ((AppController)getApplicationContext());
+                                   global.setToken(token);
+                                    startActivity(new Intent(getApplicationContext(),SecondActivity.class));
+                                }
+                            } catch (JSONException e) {
+                                CharSequence text = "Usuario o contraseña inválidos";
+                                TextView textToast = (TextView) layout.findViewById(R.id.text_toast);
+                                textToast.setText(text);
+                                Toast toast = new Toast(context);
+                                toast.setDuration(duration);
+                                toast.setView(layout);
+                                toast.show();
+                                e.printStackTrace();
                             }
+
+
                         }
                         @Override
                         public void onError() {
-                            CharSequence text = "Usuario o contraseña inválidos";
+                            CharSequence text = "Ha ocurrido un problema en la conexión";
                             TextView textToast = (TextView) layout.findViewById(R.id.text_toast);
                             textToast.setText(text);
                             Toast toast = new Toast(context);

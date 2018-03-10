@@ -22,7 +22,7 @@ public class AppController extends Application {
 
     private static AppController mInstance;
     private RequestQueue mRequestQueue;
-
+    private String token;
 
     @Override
     public void onCreate() {
@@ -45,5 +45,20 @@ public class AppController extends Application {
     public <T> void addToRequestQueue(Request<T> req) {
         req.setTag(TAG);
         getRequestQueue().add(req);
+    }
+
+    /**
+     * Guardar token
+     * @param t
+     */
+    public void setToken(String t){
+        this.token = t;
+    }
+    /**
+     * Obtener token
+     * @return
+     */
+    public String getToken(){
+        return this.token;
     }
 }

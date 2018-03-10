@@ -1,6 +1,9 @@
 package com.example.asanz.prueba;
 
 
+import android.util.Log;
+
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
@@ -8,10 +11,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class UsuarioDAO {
@@ -23,23 +30,23 @@ public class UsuarioDAO {
      * @param callBack
      * @param firstTime
      */
-    public void accesoUsuario (final String correo,final String pass, final ServerCallBack callBack, final boolean firstTime) throws JSONException {
+    public void accesoUsuario (final String correo, final String pass, final ServerCallBack callBack, final boolean firstTime) throws JSONException {
 
         //String url = "https://quiet-lowlands-92391.herokuapp.com/api/registro/";
         String url = "http://api.initech.local/oauth/token";
         //String url = "http://192.168.1.117:3000/api/registro/";
-        url = url + correo + pass;
-        JSONObject peticion = new JSONObject();
-        peticion.put("grant_type", "client_credentials");
-        peticion.put("client_id", correo);
-        peticion.put("client_secret", pass);
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, url, peticion,
-                new Response.Listener<JSONObject>() {
+        final StringRequest req = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONObject jsonObject) {
-                        JSONArray jsonArray = new JSONArray();
-                        jsonArray.put(jsonObject);
-                        callBack.onSuccess(jsonArray);
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject respuesta = new JSONObject(response);
+                            JSONArray jsonArray = new JSONArray();
+                            jsonArray.put(respuesta);
+                            callBack.onSuccess(jsonArray);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -57,8 +64,28 @@ public class UsuarioDAO {
                             callBack.onError();
                         }
                     }
-                });
+                }){
+                @Override
+                public String getBodyContentType() {
+                    return "application/x-www-form-urlencoded; charset=UTF-8";
+                }
 
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("grant_type", "client_credentials");
+                    params.put("client_id", correo.trim());
+                    params.put("client_secret", pass.trim());
+                    return params;
+                }
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String>  params = new HashMap<String, String>();
+                    params.put("Content-Type", "application/x-www-form-urlencoded");
+                    return params;
+            }
+        };
+        Log.d("Response", req.toString());
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(req);
     }
