@@ -85,7 +85,72 @@ public class UsuarioDAO {
                     return params;
             }
         };
-        Log.d("Response", req.toString());
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(req);
+    }
+
+    /**
+     * Función que comprueba si los datos de acceso son correctos
+     * @param correo
+     * @param token
+     * @param callBack
+     * @param firstTime
+     */
+    public void obtenerInfoUsuario (final String correo, final String token, final ServerCallBack callBack, final boolean firstTime) throws JSONException {
+
+        //String url = "https://quiet-lowlands-92391.herokuapp.com/api/registro/";
+        String url = "http://api.initech.local/login/impersonate";
+        //String url = "http://192.168.1.117:3000/api/registro/";
+        final StringRequest req = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject respuesta = new JSONObject(response);
+                            JSONArray jsonArray = new JSONArray();
+                            jsonArray.put(respuesta);
+                            callBack.onSuccess(jsonArray);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if (firstTime && volleyError instanceof TimeoutError) {
+                            // note : may cause recursive invoke if always timeout.
+                            try {
+                                obtenerInfoUsuario(correo, token, callBack, false);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        else {
+                            callBack.onError();
+                        }
+                    }
+                }){
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", correo.trim());
+                return params;
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer "+token.trim());
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                Log.d("Alumno", params.toString());
+                return params;
+            }
+        };
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(req);
     }

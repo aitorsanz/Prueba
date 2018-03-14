@@ -23,6 +23,7 @@ public class AppController extends Application {
     private static AppController mInstance;
     private RequestQueue mRequestQueue;
     private String token;
+    private String idAlumno;
 
     @Override
     public void onCreate() {
@@ -60,5 +61,19 @@ public class AppController extends Application {
      */
     public String getToken(){
         return this.token;
+    }
+    /**
+     * Guardar idAlumno
+     * @param i
+     */
+    public void setIdAlumno(String i){
+        this.idAlumno = i;
+    }
+    /**
+     * Obtener idAlumno
+     * @return
+     */
+    public String getIdAlumno(){
+        return this.idAlumno;
     }
 }
