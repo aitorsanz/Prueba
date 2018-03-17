@@ -147,7 +147,6 @@ public class UsuarioDAO {
                 Map<String, String>  params = new HashMap<String, String>();
                 params.put("Authorization", "Bearer "+token.trim());
                 params.put("Content-Type", "application/x-www-form-urlencoded");
-                Log.d("Alumno", params.toString());
                 return params;
             }
         };
