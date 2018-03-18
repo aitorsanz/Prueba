@@ -5,4 +5,19 @@
     <string name="materiales">Materiales Adicionales</string>
     <string name="temporizacion">Temporizaciones</string>
     <string name="exit">Salir</string>
+    <string name="settings">Preferencias</string>
+    <string name="settings_messages">Preferencias de Mensajes</string>
+    <string name="settings_mail">Recibir copia en mi cuenta personal</string>
+    <string name="privacity">Privacidad</string>
+    <string name="settings_show_mail">Mostrar mi cuenta de correo electrónico</string>
+    <string name="settings_name">Mostrar nombre</string>
+    <string name="options_completo">Nombre completo</string>
+    <string name="options_anonimo">Anónimo</string>
+    <string name="options_usuario">Usuario</string>
+    <string name="profile_information">Información de perfil</string>
+    <string name="settings_image">Mostrar mi imagen</string>
+    <string name="nickname">Nickname</string>
+    <string name="guardar">Guardar</string>
+    <string name="grades">Expediente</string>
+    <string name="time">Tiempo en la plataforma</string>
 </resources>

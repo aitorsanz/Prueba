@@ -8,32 +8,32 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Settings"
+        android:text="@string/settings"
         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Preferencias de Mensajes"
+        android:text="@string/settings_messages"
         />
     <CheckBox android:id="@+id/receive-copy-email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recibir copia en mi cuenta personal"
+        android:text="@string/settings_mail"
        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Privacidad"
+        android:text="@string/privacity"
         />
     <CheckBox android:id="@+id/show-email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mostrar mi cuenta de correo electrónico"
+        android:text="@string/settings_show_mail"
         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mostrar nombre"
+        android:text="@string/settings_name"
         />
     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
@@ -44,33 +44,33 @@
         <RadioButton android:id="@+id/completo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nombre completo"
+            android:text="@string/options_completo"
             />
         <RadioButton android:id="@+id/usuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Usuario"
+            android:text="@string/options_usuario"
             />
         <RadioButton android:id="@+id/anonimo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Anónimo"
+            android:text="@string/options_anonimo"
             />
     </RadioGroup>
     <CheckBox android:id="@+id/show-imagen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mostrar mi imagen"
+        android:text="@string/settings_image"
         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Información de perfil"
+        android:text="@string/profile_information"
         />
     <TextView
         android:layout_width="180px"
         android:layout_height="wrap_content"
-        android:text="Nickname"
+        android:text="@string/nickname"
         android:id="@+id/labelNickname"
     />
     <EditText
@@ -84,7 +84,7 @@
         android:layout_width="400px"
         android:layout_height="wrap_content"
         android:id="@+id/guardar"
-        android:text="Guardar"
+        android:text="@string/guardar"
         android:layout_marginLeft="90dp"
         android:layout_marginTop="20dp"
         android:onClick="clickGuardarPreferencias"/>

@@ -40,6 +40,7 @@ public class UsuarioDAO {
                     @Override
                     public void onResponse(String response) {
                         try {
+                            Log.d("respuesta", response);
                             JSONObject respuesta = new JSONObject(response);
                             JSONArray jsonArray = new JSONArray();
                             jsonArray.put(respuesta);
