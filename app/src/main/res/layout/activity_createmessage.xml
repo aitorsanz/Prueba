@@ -10,27 +10,44 @@
         android:layout_height="wrap_content"
         android:text="Nuevo Mensaje"
         />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Asunto"
+        />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/asunto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
          />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mensaje"
+        />
 
+    <EditText
+        android:id="@+id/mensaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Para"
         />
-
-    <EditText
-        android:id="@+id/editPara"
+    <Spinner
+        android:id="@+id/destinatario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"/>
+
 
     <Button
         android:id="@+id/createmessage"
