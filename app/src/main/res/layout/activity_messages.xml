@@ -17,9 +17,14 @@
         android:layout_margin="30dp"
         android:text="Mensaje Nuevo"
         android:onClick="clickCrearMensaje"/>
-    <ListView
-        android:id="@+id/BandejasList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <ListView android:id="@+id/MessagesList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:dividerHeight="20.0sp"/>
+    <TextView android:id="@+id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No hay asignaturas disponibles"
+        android:visibility="invisible"/>
 
 </LinearLayout>

@@ -3,15 +3,20 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:id="@+id/subjectslayout"
     android:background="#E9E4E1">
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Asignaturas"
+        android:text="Subjects"
         />
-    <ListView
-        android:id="@+id/SubjectsList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <ListView android:id="@+id/SubjectsList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:dividerHeight="20.0sp"/>
+    <TextView android:id="@+id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No hay asignaturas disponibles"
+        android:visibility="invisible"/>
 </LinearLayout>

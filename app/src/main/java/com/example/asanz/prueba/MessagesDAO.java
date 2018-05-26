@@ -196,19 +196,28 @@ public class MessagesDAO {
      * @param callBack
      * @param firstTime
      */
-    public void borrarMensaje (final String id, final ServerCallBack callBack, final boolean firstTime){
-
+    public void borrarMensaje (final String token, final String idAlumno, final String id, final String bandeja, final ServerCallBack callBack, final boolean firstTime){
+        String url = "http://api.initech.local/communication/messaging/borrar-entrada";
+        if(bandeja.equals("salida")){
+            url = "http://api.initech.local/communication/messaging/borrar-salida";
+        }
         //String url = "https://quiet-lowlands-92391.herokuapp.com/api/registro/";
-        String url = "http://10.0.2.2:3000/api/messages/borrar";
-        //String url = "http://192.168.1.117:3000/api/registro/";
-        url = url + id;
 
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.DELETE, url, null,
-                new Response.Listener<JSONObject>() {
-                    public void onResponse(JSONObject jsonObject) {
-                        JSONArray jsonArray = new JSONArray();
-                        jsonArray.put(jsonObject);
-                        callBack.onSuccess(jsonArray);
+        //String url = "http://192.168.1.117:3000/api/registro/";
+
+        final StringRequest req = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            Log.d("Respuesta", response);
+                            JSONObject respuesta = new JSONObject(response);
+                            JSONArray jsonArray = new JSONArray();
+                            jsonArray.put(respuesta);
+                            callBack.onSuccess(jsonArray);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -216,13 +225,32 @@ public class MessagesDAO {
                     public void onErrorResponse(VolleyError volleyError) {
                         if (firstTime && volleyError instanceof TimeoutError) {
                             // note : may cause recursive invoke if always timeout.
-                            borrarMensaje(id, callBack, false);
+                            borrarMensaje(token, idAlumno, id, bandeja, callBack, false);
                         }
                         else {
                             callBack.onError();
                         }
                     }
-                });
+                }){
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idAlumno", idAlumno.trim());
+                params.put("idMensaje", id.trim());
+                return params;
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer "+token.trim());
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(req);

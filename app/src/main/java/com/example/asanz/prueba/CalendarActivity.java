@@ -69,7 +69,6 @@ public class CalendarActivity extends BaseActivity {
                     array = respuesta.getJSONArray("data");
                     int tam = array.length();
                     tv = new TextView[tam];
-                    Log.d("Respuesta", array.toString());
                     for (int i = 0; i < tam; i++) {
                         String titulo = array.getJSONObject(i).getString("texto");
                         String fechaInicio = array.getJSONObject(i).getString("fechaInicio");

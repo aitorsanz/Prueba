@@ -128,7 +128,6 @@ public class CreateMessageActivity extends BaseActivity {
             messagesDAO.crearMensaje(message, token, new ServerCallBack() {
                 @Override
                 public void onSuccess(JSONArray result) {
-                    Log.d("Reultado", result.toString());
                     CharSequence text = "Mensaje enviado";
                     TextView textToast = (TextView) layout.findViewById(R.id.text_toast);
                     textToast.setText(text);

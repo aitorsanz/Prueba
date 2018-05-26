@@ -31,7 +31,7 @@ public class MessagesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
         GenericList coursesList = new GenericList(MessagesActivity.this, mensajes, imageId);
-        messages = (ListView)findViewById(R.id.BandejasList);
+        messages = (ListView)findViewById(R.id.MessagesList);
         messages.setAdapter(coursesList);
         messages.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
