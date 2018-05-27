@@ -2,8 +2,10 @@ package com.example.asanz.prueba;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.MatrixCursor;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,9 +13,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.net.HttpURLConnection;
 
 
@@ -22,147 +31,138 @@ import java.net.HttpURLConnection;
  */
 
 public class ResourceActivity extends BaseActivity {
-    ListView resources;
-    String[] recurso = {
-            "Texto",
-            "SCORM",
-            "Ejercicio",
-            "Video",
-            "Ebook"
-    } ;
-    Integer[] imageId = {
-            R.drawable.lupa,
-            R.drawable.lupa,
-            R.drawable.lupa,
-            R.drawable.lupa,
-            R.drawable.lupa
-    };
 
-    /*
-    Cliente para la conexión al servidor
-     */
-    HttpURLConnection con;
-    private ViewPager pager;
-    // TODO: 25/05/2017 Conexión con campues para obtener listado de recursos
+    private ListView listView;
+
+    private JSONArray recursos;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        final String idAsignatura = getIntent().getStringExtra("idAsignatura");
+        final String idMatriculaPrograma = getIntent().getStringExtra("idMatriculaPrograma");
+        AppController global = ((AppController)getApplicationContext());
+        String token = global.getToken();
+        String idAlumno = global.getIdAlumno();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resource);
-        // Instantiate a ViewPager
-        /*this.pager = (ViewPager) this.findViewById(R.id.pager);
 
-        // Create an adapter with the fragments we show on the ViewPager
-        MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(
-                getSupportFragmentManager());
-        adapter.addFragment(ScreenSlidePageFragment.newInstance(getResources()
-                .getColor(R.color.colorPrimary), 0));
-        adapter.addFragment(ScreenSlidePageFragment.newInstance(getResources()
-                .getColor(R.color.colorAccent), 1));
-        adapter.addFragment(ScreenSlidePageFragment.newInstance(getResources()
-                .getColor(R.color.colorPrimaryDark), 2));
-        adapter.addFragment(ScreenSlidePageFragment.newInstance(getResources()
-                .getColor(R.color.colorAccent), 3));
-        adapter.addFragment(ScreenSlidePageFragment.newInstance(getResources()
-                .getColor(R.color.colorPrimary), 4));
-        this.pager.setAdapter(adapter);
+        final Context context = getApplicationContext();
+        final int duration = Toast.LENGTH_SHORT;
+        LayoutInflater inflater = getLayoutInflater();
+        final View layout = inflater.inflate(R.layout.custom_toast,
+                (ViewGroup) findViewById(R.id.toast_layout_root));
+        final CoursesDAO coursesDAO = new CoursesDAO();
+        listView = (ListView) findViewById(R.id.ResourcesList);
 
-        // Bind the title indicator to the adapter
-        TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.indicator);
-        titleIndicator.setViewPager(pager);*/
+        registerForContextMenu(listView);
 
-
-        //Se carga la pestaña de recursos
-        GenericList resourcesList = new GenericList(ResourceActivity.this, recurso, imageId);
-        resources = (ListView)findViewById(R.id.ResourcesList);
-        resources.setAdapter(resourcesList);
-        resources.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+        coursesDAO.obtenerRecursos(token, idAlumno, idAsignatura, new ServerCallBack() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                switch (position) {
-                    case 0:
-                        startActivity(new Intent(getApplicationContext(), ResourceTextoActivity.class));
-                        break;
-                    case 1:
-                        startActivity(new Intent(getApplicationContext(), ResourceScormActivity.class));
-                        break;
-                    case 2:
-                        startActivity(new Intent(getApplicationContext(), ResourceEjercicioActivity.class));
-                        break;
-                    case 3:
-                        startActivity(new Intent(getApplicationContext(), ResourceVideoActivity.class));
-                        break;
-                    case 4:
-                        startActivity(new Intent(getApplicationContext(), ResourceEbookActivity.class));
-                        break;
+            public void onSuccess(JSONArray result) {
+                try {
+                    Log.d("Resultado", result.toString());
+                    // Create an array to specify the fields we want to display in the list
+                    String[] from = new String[]{"titulo", "id"};
+
+                    MatrixCursor asignaturasCursor = new MatrixCursor(
+                            new String[]{"_id", "titulo",  "id"});
+                    startManagingCursor(asignaturasCursor);
+                    String response = null;
+                    response = result.getString(0);
+                    JSONObject respuesta = new JSONObject(response);
+                    JSONArray array = null;
+                    array = respuesta.getJSONArray("data");
+                    recursos = respuesta.getJSONArray("data");
+                    int tam = array.length();
+                    for (int i = 0; i < tam; i++) {
+                        String titulo = array.getJSONObject(i).getString("titulo");
+                        String nombreUnidad = array.getJSONObject(i).getString("nombreUnidad");
+                        String id = array.getJSONObject(i).getString("id");
+                        asignaturasCursor.addRow(new Object[]{i, nombreUnidad + "-" +titulo, id});
+
+                    }
+                    // and an array of the fields we want to bind those fields to
+                    int[] to = new int[]{R.id.nombreRecurso,R.id.id,};
+
+                    // Now create an array adapter and set it to display using our row
+                    SimpleCursorAdapter curso =
+                            new SimpleCursorAdapter(context, R.layout.row_recurso, asignaturasCursor,
+                                    from, to);
+                    listView.setAdapter(curso);
+
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            listView.getItemAtPosition(position);
+                            try{
+                                String idPasoAgenda = recursos.getJSONObject(position)
+                                        .getString("id");
+                                String idRecurso = recursos.getJSONObject(position)
+                                        .getString("fkIdRecurso");
+                                String tipoRecurso = recursos.getJSONObject(position)
+                                        .getString("tipoRecurso");
+                                int idtipoRecurso = Integer.parseInt(tipoRecurso);
+                                Intent intent = new Intent();
+                                switch (idtipoRecurso){
+                                    case 10:
+                                        intent = new Intent(context, ResourceTextoActivity.class);
+                                        break;
+                                    case 11:
+                                        intent = new Intent(context, ResourceEjercicioActivity.class);
+                                        break;
+                                    case 12:
+                                        intent = new Intent(context, ResourceVideoActivity.class);
+                                        break;
+                                    case 13:
+                                        intent = new Intent(context, ResourceVideoActivity.class);
+                                        break;
+                                    case 14:
+                                        intent = new Intent(context, ResourceTextoActivity.class);
+                                        break;
+                                    case 15:
+                                        intent = new Intent(context, ResourceFeedbackActivity.class);
+                                        break;
+                                    case 16:
+                                        intent = new Intent(context, ResourceScormActivity.class);
+                                        break;
+                                    case 17:
+                                        intent = new Intent(context, ResourceEbookActivity.class);
+                                        break;
+                                    case 18:
+                                        intent = new Intent(context, ResourceTestActivity.class);
+                                        break;
+                                    case 19:
+                                        intent = new Intent(context, ResourceEjercicioActivity.class);
+                                        break;
+                                    default:
+                                            break;
+                                }
+                                intent.putExtra("idPasoAgenda", idPasoAgenda);
+                                intent.putExtra("idRecurso", idRecurso);
+                                intent.putExtra("tipoRecurso", tipoRecurso);
+                                startActivity(intent);
+                            } catch (Exception e){
+                                Log.d("Error:", e.toString());
+                            }
+
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
             }
-        });
-        //Pestaña de debates
-
-        //Pestaña de docentes
-
-        //Pestaña de materiales
-
-        //Pestaña de temporizaciones
-
-        // Obtener la instancia de la lista
-        /*
-        courses = (ListView) findViewById(R.id.EventsList);
-        new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        URL url = null;
-                        try {
-                            url = new URL("http://wsmoodle.local/index/courses");
-                        } catch (MalformedURLException e) {
-                            e.printStackTrace();
-                        }
-                        HttpURLConnection urlConnection = null;
-                        List<String> cursos = null;
-                        try {
-                            urlConnection = (HttpURLConnection) url.openConnection();
-                            boolean respuesta = urlConnection.getResponseCode()==HttpURLConnection.HTTP_OK;
-                            if (respuesta) {
-                                BufferedReader reader = new BufferedReader(new
-                                        InputStreamReader(urlConnection.getInputStream()));
-                                reader.close();
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }finally {
-                            urlConnection.disconnect();
-                        }
-                        InputStream in = null;
-                        try {
-                            in = new BufferedInputStream(urlConnection.getInputStream());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                        try {
-                            if(in == null){
-                                cursos = null;
-                            }else{
-                                cursos = readJsonStream(in);
-                            }
-
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                                    getBaseContext(),
-                                    android.R.layout.simple_list_item_1, cursos);
-
-                            // Relacionar adaptador a la lista
-                            courses.setAdapter(adapter);
-                            // Acciones a realizar con el flujo de datos
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-        ).start();*/
+            @Override
+            public void onError() {
+                CharSequence text = "Imposible cargar las asignaturas";
+                TextView textToast = (TextView) layout.findViewById(R.id.text_toast);
+                textToast.setText(text);
+                Toast toast = new Toast(context);
+                toast.setDuration(duration);
+                toast.setView(layout);
+                toast.show();
+            }
+        }, true);
     }
 
 

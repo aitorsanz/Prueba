@@ -12,9 +12,9 @@
         />
     <ImageView
         android:id="@+id/building"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginLeft="275px"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="75px"
         android:layout_marginTop="40px"
         android:background="#E9E4E1"
         android:src="@drawable/building" />

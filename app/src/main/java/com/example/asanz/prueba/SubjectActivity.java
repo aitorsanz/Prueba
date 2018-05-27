@@ -49,7 +49,6 @@ public class SubjectActivity extends BaseActivity {
         LayoutInflater inflater = getLayoutInflater();
         final View layout = inflater.inflate(R.layout.custom_toast,
                 (ViewGroup) findViewById(R.id.toast_layout_root));
-        final LinearLayout coursesLayout = (LinearLayout) this.findViewById(R.id.courseslayout);
         final CoursesDAO coursesDAO = new CoursesDAO();
         listView = (ListView) findViewById(R.id.SubjectsList);
 
@@ -94,8 +93,11 @@ public class SubjectActivity extends BaseActivity {
                             try{
                                 String idAsignatura = asignaturas.getJSONObject(position)
                                         .getString("id");
-                                Intent intent = new Intent(context, SubjectActivity.class);
+                                String idMatriculaPrograma = asignaturas.getJSONObject(position)
+                                        .getString("fkIdMatriculaPrograma");
+                                Intent intent = new Intent(context, ResourceActivity.class);
                                 intent.putExtra("idAsignatura", idAsignatura);
+                                intent.putExtra("idMatriculaPrograma", idMatriculaPrograma);
                                 startActivity(intent);
                             } catch (Exception e){
                                 Log.d("Error:", e.toString());
