@@ -61,7 +61,6 @@ public class ResourceActivity extends BaseActivity {
             @Override
             public void onSuccess(JSONArray result) {
                 try {
-                    Log.d("Resultado", result.toString());
                     // Create an array to specify the fields we want to display in the list
                     String[] from = new String[]{"titulo", "id"};
 
@@ -98,6 +97,8 @@ public class ResourceActivity extends BaseActivity {
                             try{
                                 String idPasoAgenda = recursos.getJSONObject(position)
                                         .getString("id");
+                                String titulo = recursos.getJSONObject(position)
+                                        .getString("titulo");
                                 String idRecurso = recursos.getJSONObject(position)
                                         .getString("fkIdRecurso");
                                 String tipoRecurso = recursos.getJSONObject(position)
@@ -124,7 +125,7 @@ public class ResourceActivity extends BaseActivity {
                                         intent = new Intent(context, ResourceFeedbackActivity.class);
                                         break;
                                     case 16:
-                                        intent = new Intent(context, ResourceScormActivity.class);
+                                        intent = new Intent(context, BuildingActivity.class);
                                         break;
                                     case 17:
                                         intent = new Intent(context, ResourceEbookActivity.class);
@@ -138,6 +139,7 @@ public class ResourceActivity extends BaseActivity {
                                     default:
                                             break;
                                 }
+                                intent.putExtra("titulo", titulo);
                                 intent.putExtra("idPasoAgenda", idPasoAgenda);
                                 intent.putExtra("idRecurso", idRecurso);
                                 intent.putExtra("tipoRecurso", tipoRecurso);

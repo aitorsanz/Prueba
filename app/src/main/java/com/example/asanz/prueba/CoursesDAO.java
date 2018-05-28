@@ -1,5 +1,7 @@
 package com.example.asanz.prueba;
 
+import android.util.Log;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -212,31 +214,59 @@ public class CoursesDAO {
      * @param callBack
      * @param firstTime
      */
-    public void obtenerDetalleRecurso (final String idAsignatura, final String idRecurso, final ServerCallBack callBack, final boolean firstTime){
+    public void obtenerDetalleRecurso (final String token, final String idAlumno, final String idRecurso, final String tipoRecurso, final ServerCallBack callBack, final boolean firstTime){
 
         //String url = "https://quiet-lowlands-92391.herokuapp.com/api/registro/";
-        String url = "http://10.0.2.2:3000/api/cursos/detallerecurso";
+        String url = "http://api.initech.local/study/course/detail";
         //String url = "http://192.168.1.117:3000/api/registro/";
-
-        JsonArrayRequest req = new JsonArrayRequest(url,
-                new Response.Listener<JSONArray>() {
+        Log.d("tipo", tipoRecurso);
+        Log.d("recurso", idRecurso);
+        final StringRequest req = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONArray response) {
-                        callBack.onSuccess(response);
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject respuesta = new JSONObject(response);
+                            JSONArray jsonArray = new JSONArray();
+                            jsonArray.put(respuesta);
+                            callBack.onSuccess(jsonArray);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }, new Response.ErrorListener() {
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if (firstTime && volleyError instanceof TimeoutError) {
+                            // note : may cause recursive invoke if always timeout.
+                            obtenerDetalleRecurso(token, idAlumno, idRecurso, tipoRecurso,   callBack, false);
+                        }
+                        else {
+                            callBack.onError();
+                        }
+                    }
+                }){
             @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("Error: ", error.getMessage());
-                if (firstTime && error instanceof TimeoutError) {
-                    // note : may cause recursive invoke if always timeout.
-                    obtenerDetalleRecurso(idAsignatura, idRecurso, callBack, false);
-                }
-                else {
-                    callBack.onError();
-                }
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
             }
-        });
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idAlumno", idAlumno.trim());
+                params.put("idRecurso", idRecurso.trim());
+                params.put("tipoRecurso", tipoRecurso.trim());
+                return params;
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer "+token.trim());
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(req);
