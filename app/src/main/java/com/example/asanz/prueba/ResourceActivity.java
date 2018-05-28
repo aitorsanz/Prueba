@@ -128,7 +128,7 @@ public class ResourceActivity extends BaseActivity {
                                         intent = new Intent(context, BuildingActivity.class);
                                         break;
                                     case 17:
-                                        intent = new Intent(context, ResourceEbookActivity.class);
+                                        intent = new Intent(context, ResourceTextoActivity.class);
                                         break;
                                     case 18:
                                         intent = new Intent(context, ResourceTestActivity.class);
