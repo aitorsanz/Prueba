@@ -67,7 +67,7 @@ public class ResourceTextoActivity extends BaseActivity {
                         TextView descripcionView = (TextView)findViewById(R.id.descripcion);
                         contenidoView.setText(contenido);
                         descripcionView.setText(descripcion);
-                    }else if(tipoRecurso.equals("14")){
+                    }/*else if(tipoRecurso.equals("14")){
                         Log.d("array", array.toString());
                         String contenido = array.getString("url");
                         JSONArray content = new JSONArray(contenido);
@@ -81,7 +81,7 @@ public class ResourceTextoActivity extends BaseActivity {
                         TextView descripcionView = (TextView)findViewById(R.id.descripcion);
                         contenidoView.setText(contenido);
                         descripcionView.setText(descripcion);
-                    }
+                    }*/
 
                 } catch (JSONException e) {
                     e.printStackTrace();

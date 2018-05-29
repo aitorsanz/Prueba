@@ -113,13 +113,13 @@ public class ResourceActivity extends BaseActivity {
                                         intent = new Intent(context, ResourceEjercicioActivity.class);
                                         break;
                                     case 12:
-                                        intent = new Intent(context, ResourceVideoActivity.class);
+                                        intent = new Intent(context, ResourceEjercicioActivity.class);
                                         break;
                                     case 13:
-                                        intent = new Intent(context, ResourceVideoActivity.class);
+                                        intent = new Intent(context, ResourceEjercicioActivity.class);
                                         break;
                                     case 14:
-                                        intent = new Intent(context, ResourceTextoActivity.class);
+                                        intent = new Intent(context, ResourceEbookActivity.class);
                                         break;
                                     case 15:
                                         intent = new Intent(context, ResourceFeedbackActivity.class);
@@ -128,7 +128,7 @@ public class ResourceActivity extends BaseActivity {
                                         intent = new Intent(context, BuildingActivity.class);
                                         break;
                                     case 17:
-                                        intent = new Intent(context, ResourceEbookActivity.class);
+                                        intent = new Intent(context, ResourceVideoActivity.class);
                                         break;
                                     case 18:
                                         intent = new Intent(context, ResourceTestActivity.class);
