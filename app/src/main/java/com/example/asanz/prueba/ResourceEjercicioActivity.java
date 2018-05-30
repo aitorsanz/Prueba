@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -110,7 +111,9 @@ public class ResourceEjercicioActivity extends BaseActivity {
             public void onClick(View v){
                 String type = "application/pdf";
                 if(extension.equals("jpg") || extension.equals("png") || extension.equals("gif") || extension.equals("jpeg")){
-                    type = "image/jpeg";
+                    type = "image/*";
+                }else if(extension.equals("mp3")  || extension.equals("wav") ){
+                    type = "audio/*";
                 }
 
                 OutputStream outputStream = null;
@@ -121,12 +124,18 @@ public class ResourceEjercicioActivity extends BaseActivity {
                     outputStream = new FileOutputStream(futureStudioIconFile);
                     outputStream.write(data, 0, tam);
                     outputStream.flush();
+                    MimeTypeMap map = MimeTypeMap.getSingleton();
                     java.io.File file = new java.io.File(Environment
                             .getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                             + "/" + fileName);
+                    String ext = MimeTypeMap.getFileExtensionFromUrl(file.getName());
+                    String tipo = map.getMimeTypeFromExtension(ext);
+                    if(tipo == null){
+                        tipo = "*/*";
+                    }
                     try {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setDataAndType(Uri.fromFile(file), type);
+                        intent.setDataAndType(Uri.fromFile(file), tipo);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                         startActivity(intent);
                     } catch (ActivityNotFoundException e) {
