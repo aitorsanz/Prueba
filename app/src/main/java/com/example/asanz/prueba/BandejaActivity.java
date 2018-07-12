@@ -64,7 +64,6 @@ public class BandejaActivity extends BaseActivity {
             messagesDAO.obtenerMensajesSalida(token, idAlumno, new ServerCallBack() {
                 @Override
                 public void onSuccess(JSONArray result) {
-                    //TODO mostras listado de mensajes del usuario
                     try {
                         // Create an array to specify the fields we want to display in the list
                         String[] from = new String[]{"mensaje", "id"};

@@ -35,9 +35,14 @@
         <activity android:name=".ResourceTextoActivity" />
         <activity android:name=".ResourceEjercicioActivity" />
         <activity android:name=".ResourceEbookActivity" />
+        <activity android:name=".ResourceFeedbackActivity" />
+        <activity android:name=".ResourceTestActivity" />
         <activity android:name=".SubjectActivity" />
         <activity android:name=".BandejaActivity" />
-        <activity android:name=".DetailEventActivity" />
+        <activity android:name=".AdditionalsMaterialsActivity" />
+        <activity android:name=".EventsActivity" />
+        <activity android:name=".TeachersActivity" />
+        <activity android:name=".DiscussionsActivity" />
         <activity android:name=".BuildingActivity" />
 
     </application>

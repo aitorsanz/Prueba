@@ -35,10 +35,10 @@ public class ResourceActivity extends BaseActivity {
     private ListView listView;
 
     private JSONArray recursos;
-
+    private String idAsignatura = "";
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        final String idAsignatura = getIntent().getStringExtra("idAsignatura");
+        idAsignatura = getIntent().getStringExtra("idAsignatura");
         final String idMatriculaPrograma = getIntent().getStringExtra("idMatriculaPrograma");
         AppController global = ((AppController)getApplicationContext());
         String token = global.getToken();
@@ -180,25 +180,29 @@ public class ResourceActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.debates:
-                Intent intent = new Intent(this, BuildingActivity.class);
+                Intent intent = new Intent(this, DiscussionsActivity.class);
+                intent.putExtra("idAsignatura", idAsignatura);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
                 return true;
             case R.id.docentes:
-                intent = new Intent(this, BuildingActivity.class);
+                intent = new Intent(this, TeachersActivity.class);
+                intent.putExtra("idAsignatura", idAsignatura);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
                 return true;
             case R.id.temporizacion:
-                intent = new Intent(this, BuildingActivity.class);
+                intent = new Intent(this, EventsActivity.class);
+                intent.putExtra("idAsignatura", idAsignatura);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
                 return true;
             case R.id.materiales:
-                intent = new Intent(this, BuildingActivity.class);
+                intent = new Intent(this, AdditionalsMaterialsActivity.class);
+                intent.putExtra("idAsignatura", idAsignatura);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();

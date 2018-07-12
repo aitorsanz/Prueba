@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#E9E4E1">
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <ImageView
+        android:id="@+id/ejercicio"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="275px"
+        android:layout_marginTop="40px"
+        android:background="#E9E4E1"
+        android:src="@drawable/ejercicio" />
+    <ImageView
+        android:id="@+id/ivAttachment"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="275px"
+        android:layout_marginTop="40px"
+        android:src="@drawable/upload"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/tv_file_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#0d0c0c"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:layout_below="@+id/ivAttachment"
+        android:layout_centerHorizontal="true"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/b_upload"
+        android:text="Upload"
+        android:textStyle="bold"
+        android:textSize="30px"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:textColor="#fff" />
+</LinearLayout>

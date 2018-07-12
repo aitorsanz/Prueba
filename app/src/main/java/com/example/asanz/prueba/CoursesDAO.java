@@ -271,6 +271,68 @@ public class CoursesDAO {
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(req);
     }
+
+    /**
+     * Función que obtiene el detalle de un recurso
+     * @param callBack
+     * @param firstTime
+     */
+    public void enviarFeedback (final String token, final String idAlumno, final String idRecurso, final String nombreFichero, final String fichero, final ServerCallBack callBack, final boolean firstTime){
+
+        //String url = "https://quiet-lowlands-92391.herokuapp.com/api/registro/";
+        String url = "http://api.initech.local/study/course/receivefeedback";
+        //String url = "http://192.168.1.117:3000/api/registro/";
+        final StringRequest req = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject respuesta = new JSONObject(response);
+                            JSONArray jsonArray = new JSONArray();
+                            jsonArray.put(respuesta);
+                            callBack.onSuccess(jsonArray);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if (firstTime && volleyError instanceof TimeoutError) {
+                            // note : may cause recursive invoke if always timeout.
+                            enviarFeedback(token, idAlumno, idRecurso, nombreFichero, fichero,   callBack, false);
+                        }
+                        else {
+                            callBack.onError();
+                        }
+                    }
+                }){
+            @Override
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
+            }
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idAlumno", idAlumno.trim());
+                params.put("idRecurso", idRecurso.trim());
+                params.put("fichero", fichero.trim());
+                params.put("nombreFichero", nombreFichero.trim());
+                return params;
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer "+token.trim());
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(req);
+    }
     /**
      * Función que marca un recurso como finalizado
      * @param callBack
@@ -313,31 +375,55 @@ public class CoursesDAO {
      * @param callBack
      * @param firstTime
      */
-    public void obtenerDebates (final String idAsignatura, final ServerCallBack callBack, final boolean firstTime){
+    public void obtenerDebates (final String token, final String idAsignatura, final ServerCallBack callBack, final boolean firstTime){
 
         //String url = "https://quiet-lowlands-92391.herokuapp.com/api/registro/";
-        String url = "http://10.0.2.2:3000/api/cursos/debates";
+        String url = "http://api.initech.local/study/course/debates";
         //String url = "http://192.168.1.117:3000/api/registro/";
-
-        JsonArrayRequest req = new JsonArrayRequest(url,
-                new Response.Listener<JSONArray>() {
+        final StringRequest req = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONArray response) {
-                        callBack.onSuccess(response);
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject respuesta = new JSONObject(response);
+                            JSONArray jsonArray = new JSONArray();
+                            jsonArray.put(respuesta);
+                            callBack.onSuccess(jsonArray);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }, new Response.ErrorListener() {
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if (firstTime && volleyError instanceof TimeoutError) {
+                            // note : may cause recursive invoke if always timeout.
+                            obtenerDebates(token, idAsignatura,   callBack, false);
+                        }
+                        else {
+                            callBack.onError();
+                        }
+                    }
+                }){
             @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("Error: ", error.getMessage());
-                if (firstTime && error instanceof TimeoutError) {
-                    // note : may cause recursive invoke if always timeout.
-                    obtenerDebates(idAsignatura, callBack, false);
-                }
-                else {
-                    callBack.onError();
-                }
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
             }
-        });
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idAsignatura", idAsignatura.trim());
+                return params;
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer "+token.trim());
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(req);
@@ -533,31 +619,55 @@ public class CoursesDAO {
      * @param callBack
      * @param firstTime
      */
-    public void obtenerDocentes (final String idAsignatura, final ServerCallBack callBack, final boolean firstTime){
+    public void obtenerDocentes (final String token , final String idAsignatura, final ServerCallBack callBack, final boolean firstTime){
 
         //String url = "https://quiet-lowlands-92391.herokuapp.com/api/registro/";
-        String url = "http://10.0.2.2:3000/api/cursos/docentes";
+        String url = "http://api.initech.local/study/course/docentes";
         //String url = "http://192.168.1.117:3000/api/registro/";
-
-        JsonArrayRequest req = new JsonArrayRequest(url,
-                new Response.Listener<JSONArray>() {
+        final StringRequest req = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONArray response) {
-                        callBack.onSuccess(response);
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject respuesta = new JSONObject(response);
+                            JSONArray jsonArray = new JSONArray();
+                            jsonArray.put(respuesta);
+                            callBack.onSuccess(jsonArray);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }, new Response.ErrorListener() {
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if (firstTime && volleyError instanceof TimeoutError) {
+                            // note : may cause recursive invoke if always timeout.
+                            obtenerDocentes(token, idAsignatura,   callBack, false);
+                        }
+                        else {
+                            callBack.onError();
+                        }
+                    }
+                }){
             @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("Error: ", error.getMessage());
-                if (firstTime && error instanceof TimeoutError) {
-                    // note : may cause recursive invoke if always timeout.
-                    obtenerDocentes(idAsignatura, callBack, false);
-                }
-                else {
-                    callBack.onError();
-                }
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
             }
-        });
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idAsignatura", idAsignatura.trim());
+                return params;
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer "+token.trim());
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(req);
@@ -568,31 +678,55 @@ public class CoursesDAO {
      * @param callBack
      * @param firstTime
      */
-    public void obtenerMateriales (final String idAsignatura, final ServerCallBack callBack, final boolean firstTime){
+    public void obtenerMateriales (final String token, final String idAsignatura, final ServerCallBack callBack, final boolean firstTime){
 
         //String url = "https://quiet-lowlands-92391.herokuapp.com/api/registro/";
-        String url = "http://10.0.2.2:3000/api/cursos/materiales";
+        String url = "http://api.initech.local/study/course/materiales";
         //String url = "http://192.168.1.117:3000/api/registro/";
-
-        JsonArrayRequest req = new JsonArrayRequest(url,
-                new Response.Listener<JSONArray>() {
+        final StringRequest req = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONArray response) {
-                        callBack.onSuccess(response);
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject respuesta = new JSONObject(response);
+                            JSONArray jsonArray = new JSONArray();
+                            jsonArray.put(respuesta);
+                            callBack.onSuccess(jsonArray);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }, new Response.ErrorListener() {
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if (firstTime && volleyError instanceof TimeoutError) {
+                            // note : may cause recursive invoke if always timeout.
+                            obtenerMateriales(token, idAsignatura,   callBack, false);
+                        }
+                        else {
+                            callBack.onError();
+                        }
+                    }
+                }){
             @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("Error: ", error.getMessage());
-                if (firstTime && error instanceof TimeoutError) {
-                    // note : may cause recursive invoke if always timeout.
-                    obtenerDocentes(idAsignatura, callBack, false);
-                }
-                else {
-                    callBack.onError();
-                }
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
             }
-        });
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idAsignatura", idAsignatura.trim());
+                return params;
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer "+token.trim());
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(req);
@@ -603,31 +737,56 @@ public class CoursesDAO {
      * @param callBack
      * @param firstTime
      */
-    public void obtenerTemporizaciones(final String idAsignatura, final ServerCallBack callBack, final boolean firstTime){
+    public void obtenerTemporizaciones(final String token, final String idAlumno, final String idAsignatura, final ServerCallBack callBack, final boolean firstTime){
 
         //String url = "https://quiet-lowlands-92391.herokuapp.com/api/registro/";
-        String url = "http://10.0.2.2:3000/api/cursos/temporizacion";
+        String url = "http://api.initech.local/study/course/temporizaciones";
         //String url = "http://192.168.1.117:3000/api/registro/";
-
-        JsonArrayRequest req = new JsonArrayRequest(url,
-                new Response.Listener<JSONArray>() {
+        final StringRequest req = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONArray response) {
-                        callBack.onSuccess(response);
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject respuesta = new JSONObject(response);
+                            JSONArray jsonArray = new JSONArray();
+                            jsonArray.put(respuesta);
+                            callBack.onSuccess(jsonArray);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }, new Response.ErrorListener() {
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        if (firstTime && volleyError instanceof TimeoutError) {
+                            // note : may cause recursive invoke if always timeout.
+                            obtenerTemporizaciones(token, idAlumno, idAsignatura,   callBack, false);
+                        }
+                        else {
+                            callBack.onError();
+                        }
+                    }
+                }){
             @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("Error: ", error.getMessage());
-                if (firstTime && error instanceof TimeoutError) {
-                    // note : may cause recursive invoke if always timeout.
-                    obtenerTemporizaciones(idAsignatura, callBack, false);
-                }
-                else {
-                    callBack.onError();
-                }
+            public String getBodyContentType() {
+                return "application/x-www-form-urlencoded; charset=UTF-8";
             }
-        });
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("idAsignatura", idAsignatura.trim());
+                params.put("idAlumno", idAlumno.trim());
+                return params;
+            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer "+token.trim());
+                params.put("Content-Type", "application/x-www-form-urlencoded");
+                return params;
+            }
+        };
 
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(req);
