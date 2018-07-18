@@ -63,10 +63,11 @@ public class AdditionalsMaterialsActivity extends BaseActivity {
                     materiales = respuesta.getJSONArray("data");
                     int tam = array.length();
                     for (int i = 0; i < tam; i++) {
-                        String texto = array.getJSONObject(i).getString("nombre");
+                        String titulo = array.getJSONObject(i).getString("titulo");
+                        String texto = array.getJSONObject(i).getString("texto");
 
                         String id = array.getJSONObject(i).getString("id");
-                        String material = texto;
+                        String material = titulo + " - " + texto;
                         mensajesCursor.addRow(new Object[]{i, material, id});
                     }
                     // and an array of the fields we want to bind those fields to
