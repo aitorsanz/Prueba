@@ -55,9 +55,12 @@ public class ResourceEbookActivity extends BaseActivity {
                     JSONObject respuesta = new JSONObject(response);
                     JSONObject array = null;
                     array = respuesta.getJSONObject("data");
-                    String contenido = array.getString("url");
-                    JSONArray content = new JSONArray(contenido);
-                    String url = content.getJSONObject(0).getString("url");
+                    Log.d("Contenido", array.toString());
+                    String contenido = "http://video.seas.es/util/le2/HIB7002/index.html";
+                    //String contenido = array.getString("url");
+                    //JSONArray content = new JSONArray(contenido);
+                    //String url = content.getJSONObject(0).getString("url");
+                    String url = "http://video.seas.es/util/le2/HIB7002/index.html";
 
                     String description = array.getString("descripcion");
                     description = android.text.Html.fromHtml(description).toString();

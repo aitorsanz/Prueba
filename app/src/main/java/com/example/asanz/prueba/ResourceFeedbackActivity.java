@@ -7,11 +7,13 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -231,6 +233,13 @@ public class ResourceFeedbackActivity extends BaseActivity {
         }
     }
 
+    public String getPath(Uri uri) {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
     //android upload file to server
     public int uploadFile(final String selectedFilePath, final String idRecurso){
         requestRead();
@@ -257,7 +266,7 @@ public class ResourceFeedbackActivity extends BaseActivity {
         Log.d("TAMF", Long.toString(f.length()));
         Log.d("TAM", Long.toString(file.length()));
         Log.d("TAM2", Long.toString(selectedFile.length()));
-        if (!file.isFile()){
+        if (!f.isFile()){
             //dialog.dismiss();
 
             runOnUiThread(new Runnable() {

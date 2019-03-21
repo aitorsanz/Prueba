@@ -58,6 +58,7 @@ public class ResourceTextoActivity extends BaseActivity {
                     JSONObject array = null;
                     array = respuesta.getJSONObject("data");
                     if(tipoRecurso.equals("10")){
+                        Log.d("respuesta", array.toString());
                         String contenido = array.getString("contenido");
                         contenido = android.text.Html.fromHtml(contenido).toString();
                         String descripcion = array.getString("descripcion");

@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -25,6 +27,8 @@ import org.json.JSONObject;
  */
 
 public class ResourceTestActivity extends BaseActivity {
+
+    private ListView listView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,12 +49,18 @@ public class ResourceTestActivity extends BaseActivity {
         final View layout = inflater.inflate(R.layout.custom_toast,
                 (ViewGroup) findViewById(R.id.toast_layout_root));
         final CoursesDAO coursesDAO = new CoursesDAO();
-        Log.d("idRecurso", idRecurso);
-        Log.d("tipoRecurso", tipoRecurso);
+        listView = (ListView) findViewById(R.id.PreguntasList);
+        final LinearLayout checkboxLayout = (LinearLayout)findViewById(R.id.testlayout);
+
         coursesDAO.obtenerDetalleRecurso(token, idAlumno, idRecurso, tipoRecurso, new ServerCallBack() {
             @Override
             public void onSuccess(JSONArray result) {
                 try {
+                    String[] from = new String[]{"enunciado", "id"};
+
+                    MatrixCursor preguntasCursor = new MatrixCursor(
+                            new String[]{"_id", "enunciado", "id"});
+
                     String response = null;
                     response = result.getString(0);
                     JSONObject respuesta = new JSONObject(response);
@@ -58,15 +68,41 @@ public class ResourceTestActivity extends BaseActivity {
                     JSONArray array = null;
                     array = respuesta.getJSONArray("data");
                     int tam = array.length();
+                    String preguntaAnterior = "";
+                    String enunciado = "";
+                    CheckBox[] respuestas = new CheckBox[tam];
                     for (int i = 0; i < tam; i++) {
-                        if(i == 0){
-                            String pregunta = array.getJSONObject(i).getString("fkIdPregunta");
+                        String pregunta = array.getJSONObject(i).getString("idPregunta");
+                        if(pregunta.equals(preguntaAnterior)){
+                            if(i == 0){
+                                enunciado = array.getJSONObject(i).getString("enunciadoPregunta");
+                                enunciado = android.text.Html.fromHtml(enunciado).toString();
+                                preguntasCursor.addRow(new Object[]{i, enunciado, pregunta});
+                            }
 
                         }else{
+                            preguntasCursor.addRow(new Object[]{i, enunciado, preguntaAnterior});
 
                         }
+                        CheckBox cb = new CheckBox(context);
+                        cb.setText(enunciado);
+
+
+                        respuestas[i]=cb;
+                        checkboxLayout.addView(cb);
+                        enunciado = array.getJSONObject(i).getString("enunciadoPregunta");
+                        enunciado = android.text.Html.fromHtml(enunciado).toString();
+                        preguntaAnterior = array.getJSONObject(i).getString("idPregunta");
+
                     }
-                    Log.d("array", array.toString());
+                    int[] to = new int[]{R.id.enunciado,R.id.id,};
+
+                    // Now create an array adapter and set it to display using our row
+                    SimpleCursorAdapter mensaje =
+                            new SimpleCursorAdapter(context, R.layout.row_tests, preguntasCursor,
+                                    from, to);
+                    listView.setAdapter(mensaje);
+                    //Log.d("array", respuestas.toString());
 
                 } catch (JSONException e) {
                     e.printStackTrace();

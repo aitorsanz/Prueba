@@ -59,9 +59,10 @@ public class ResourceVideoActivity extends BaseActivity {
                     JSONObject respuesta = new JSONObject(response);
                     JSONObject array = null;
                     array = respuesta.getJSONObject("data");
-                    String contenido = array.getString("url");
-                    JSONArray content = new JSONArray(contenido);
-                    String url = content.getJSONObject(0).getString("url");
+                    //String contenido = array.getString("url");
+                    //JSONArray content = new JSONArray(contenido);
+                    //String url = content.getJSONObject(0).getString("url");
+                    String url = "http://video.seas.es/videos/hiberus/H0001/ModuloII/VideoTutorial5_GuiadeInstalacionAcquia.mp4";
                     VideoView vidView = (VideoView)findViewById(R.id.myVideo);
                     String vidAddress = url;
                     vidView.setVideoPath(vidAddress);
